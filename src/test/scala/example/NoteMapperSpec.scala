@@ -19,30 +19,19 @@ class NoteMapperSpec extends FlatSpec with Matchers {
   testNextNote("E", "F")
   testNextNote("G", "G#")
   testNextNote("G#","A")
-
 }
 
-class StringMapperSpec extends FlatSpec with Matchers {
-  val stringMapper = StringMapper()
+class GuitarSpec extends FlatSpec with Matchers {
+  val standardETunedGuitar = Guitar(Array("E","A","D","G","B","E"))
+  val standardCTunedGuitar = Guitar(Array("C","F","A#","D#","G","C"))
 
-  def testForNote(note: String): Unit = {
-    s"getStringStartingWith $note" should s"have a length of 12 and end with $note" in {
-      val string = stringMapper getStringStartingWith note
-      string.length should be (12)
-      string.last should be (note)
-    }
+  "getFret 0 on a standard tuned guitar" should "return (E,A,D,G,B,E)" in {
+    standardETunedGuitar.getFret(0) should be (List("E","A","D","G","B","E"))
   }
 
-  testForNote("A")
-  testForNote("A#")
-  testForNote("B")
-  testForNote("C")
-  testForNote("C#")
-  testForNote("D")
-  testForNote("D#")
-  testForNote("E")
-  testForNote("F")
-  testForNote("F#")
-  testForNote("G")
-  testForNote("G#")
+  "getFret 0 on a standard tuned guitar" should "return (C,F,A#,D#,G,C)" in {
+    standardCTunedGuitar.getFret(0) should be (List("C","F","A#","D#","G","C"))
+  }
 }
+
+
