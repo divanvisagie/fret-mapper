@@ -20,15 +20,17 @@ object FretMapperApp extends JFXApp {
 
   val container = new GridPane()
 
-  (0 to 12).foreach { fret =>
-    guitar.getFret(fret).zipWithIndex.foreach { indexedNote =>
-
-      val noteView = NoteView(indexedNote._2,fret)
+  val noteViews = (0 to 12).flatMap { fret =>
+    guitar.getFret(fret).zipWithIndex.map { indexedNote =>
+      val noteView = NoteView(indexedNote._2, fret)
       noteView.setGuitar(guitar)
-      container.add(noteView.holder,fret,noteView.columnPosition)
+      container.add(noteView.holder, fret, noteView.columnPosition)
+      noteView
     }
 
   }
+
+  noteViews.foreach(_.setGuitar(Guitar.standardC))
 
 
 
@@ -50,7 +52,7 @@ object FretMapperApp extends JFXApp {
   stage = new JFXApp.PrimaryStage {
     title.value = "Fret Mapper"
     width = 500
-    height = 500
+    height = 200
     scene = new Scene {
       root = containerBox
     }
