@@ -6,9 +6,25 @@ import scalafx.event.ActionEvent
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control._
-import scalafx.scene.layout.{BorderPane, GridPane}
+import scalafx.scene.layout.{BorderPane, GridPane, HBox}
 
+class TuningSelector(noteViews: IndexedSeq[NoteView]) {
 
+  val box = new HBox()
+  private val combobox = new ComboBox[String]()
+  Guitar.tuningsMap.keys.foreach { key =>
+    combobox += key
+  }
+  combobox.getSelectionModel.select(0)
+  box.children.add(combobox)
+  box.padding = Insets(0,0,10,0)
+
+  combobox.onAction = (_: ActionEvent) => {
+    val key = combobox.getSelectionModel.getSelectedItem
+    val guitar = Guitar(Guitar.tuningsMap(key))
+    noteViews foreach(_.setGuitar(guitar))
+  }
+}
 
 object FretMapperApp extends JFXApp {
 
@@ -25,21 +41,9 @@ object FretMapperApp extends JFXApp {
     }
   }
 
-  val tuningSelector = new ComboBox[String]()
-  Guitar.tuningsMap.keys.foreach { key =>
-    tuningSelector += key
-  }
-  tuningSelector.getSelectionModel.select(0)
-
-  tuningSelector.onAction = (_: ActionEvent) => {
-    val key = tuningSelector.getSelectionModel.getSelectedItem
-    val guitar = Guitar(Guitar.tuningsMap(key))
-    noteViews foreach(_.setGuitar(guitar))
-  }
-
   private val containerBox = new BorderPane {
     center = container
-    top = tuningSelector
+    top = new TuningSelector(noteViews).box
   }
   containerBox.padding = Insets(10,10,10,10)
 
