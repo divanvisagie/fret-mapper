@@ -9,8 +9,13 @@ class NoteMapperSpec extends FlatSpec with Matchers {
 class StringMapperSpect extends FlatSpec with Matchers {
   val stringMapper = StringMapper()
 
-  "getStringStartingWith C" should " have a length of 12" in {
-    val string = stringMapper getStringStartingWith "C"
-    string.length should be (12)
+  def testForNote(note: String): Unit = {
+    s"getStringStartingWith $note" should s"have a length of 12 and end with $note" in {
+      val string = stringMapper getStringStartingWith "C"
+      string.length should be (12)
+      string.last should be (note)
+    }
   }
+
+  testForNote("C")
 }
