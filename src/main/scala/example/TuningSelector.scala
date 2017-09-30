@@ -1,6 +1,6 @@
 package example
 
-import scalafx.event.ActionEvent
+import scalafx.Includes._
 import scalafx.geometry.Insets
 import scalafx.scene.control.ComboBox
 import scalafx.scene.layout.HBox
@@ -16,7 +16,7 @@ class TuningSelector(noteViews: IndexedSeq[NoteView]) {
   box.children.add(combobox)
   box.padding = Insets(0,0,10,0)
 
-  combobox.onAction = (_: ActionEvent) => {
+  combobox.onAction = handle {
     val key = combobox.getSelectionModel.getSelectedItem
     val guitar = Guitar(Guitar.tuningsMap(key))
     noteViews foreach(_.setGuitar(guitar))
