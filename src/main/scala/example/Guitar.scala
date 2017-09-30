@@ -4,12 +4,18 @@ class Guitar(tuning: Array[String]) {
 
   val stringMapper = StringMapper()
 
-  tuning.map { stringNote =>
+  val strings = tuning.map { stringNote =>
     stringMapper.getStringStartingWith(stringNote)
   }
 
   def getFret(number: Int): Array[String] = {
-    tuning
+    if (number == 0) {
+      tuning
+    } else {
+      strings.map { guitarString =>
+        guitarString(number-1)
+      }
+    }
   }
 }
 object Guitar {
