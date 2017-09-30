@@ -10,28 +10,22 @@ import scalafx.scene.control._
 import scalafx.scene.layout.{BorderPane, GridPane}
 import scalafx.scene.shape.Rectangle
 
+
+
+
+
 object FretMapperApp extends JFXApp {
 
-  val guitar = Guitar.standardE
-
-  val strings = ObservableBuffer[Array[String]](
-    guitar.strings(0),
-    guitar.strings(1),
-    guitar.strings(2)
-  )
+  private val guitar = Guitar.standardE
 
   val container = new GridPane()
 
   (1 to 12).foreach { fret =>
     guitar.getFret(fret).zipWithIndex.foreach { indexedNote =>
-      val label = new Label(s"-${indexedNote._1}-")
 
-      val holder = new BorderPane()
-      holder.setStyle("-fx-background-color: white;")
-      holder.setMinWidth(32)
-      holder.center = label
-
-      container.add(holder,fret,indexedNote._2)
+      val noteView = NoteView(indexedNote._2,fret)
+      noteView.setGuitar(guitar)
+      container.add(noteView.holder,fret,indexedNote._2)
     }
 
   }
