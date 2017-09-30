@@ -2,16 +2,11 @@ package example
 
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
-import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control._
 import scalafx.scene.layout.{BorderPane, GridPane}
-import scalafx.scene.shape.Rectangle
-
-
 
 
 
@@ -30,29 +25,16 @@ object FretMapperApp extends JFXApp {
     }
   }
 
-  noteViews.foreach(_.setGuitar(Guitar.standardC))
-
   val tuningSelector = new ComboBox[String]()
-  tuningSelector += "Standard E"
-  tuningSelector += "Standard C"
+  Guitar.tuningsMap.keys.foreach { key =>
+    tuningSelector += key
+  }
+  tuningSelector.getSelectionModel.select(0)
 
   tuningSelector.onAction = (_: ActionEvent) => {
-    val newGuitarType = tuningSelector.getSelectionModel.getSelectedItem match {
-      case "Standard C" => Guitar.standardC
-      case _ => Guitar.standardE
-    }
-    noteViews foreach(_.setGuitar(newGuitarType))
-  }
-
-  val testButton = new Button("Say Hello")
-  testButton.onAction = (_: ActionEvent) => {
-    println("Test this")
-
-    val alert = new Alert(AlertType.Information)
-    alert.title = "Hello World Info"
-    alert.headerText = "This is a hello world announcement"
-    alert.contentText = "Hello World"
-    alert.show()
+    val key = tuningSelector.getSelectionModel.getSelectedItem
+    val guitar = Guitar(Guitar.tuningsMap(key))
+    noteViews foreach(_.setGuitar(guitar))
   }
 
   private val containerBox = new BorderPane {

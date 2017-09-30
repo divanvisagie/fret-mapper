@@ -1,14 +1,7 @@
 package example
 
-import scalafx.Includes._
-import scalafx.application.JFXApp
-import scalafx.collections.ObservableBuffer
-import scalafx.event.ActionEvent
-import scalafx.scene.Scene
-import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control._
-import scalafx.scene.layout.{BorderPane, GridPane}
-import scalafx.scene.shape.Rectangle
+import scalafx.scene.layout.BorderPane
 
 
 class NoteView(stringNumber: Int, fretNumber: Int) {

@@ -22,4 +22,9 @@ object Guitar {
   def apply(tuning: Array[String]): Guitar = new Guitar(tuning)
   def standardE: Guitar = new Guitar(Array("E","A","D","G","B","E"))
   def standardC: Guitar = new Guitar(Array("C","F","A#","D#","G","C"))
+
+  val tuningsMap: Map[String,Array[String]] = Map[String,Array[String]](
+    "Standard E" -> Array("E","A","D","G","B","E"),
+    "Standard C" -> Array("C","F","A#","D#","G","C")
+  )
 }
