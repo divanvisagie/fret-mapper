@@ -20,4 +20,6 @@ class Guitar(tuning: Array[String]) {
 }
 object Guitar {
   def apply(tuning: Array[String]): Guitar = new Guitar(tuning)
+  def standardE: Guitar = new Guitar(Array("E","A","D","G","B","E"))
+  def standardC: Guitar = new Guitar(Array("C","F","A#","D#","G","C"))
 }
