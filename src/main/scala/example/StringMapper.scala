@@ -1,11 +1,18 @@
 package example
 
 class StringMapper {
+  val noteMapper = NoteMapper()
+
   def getStringStartingWith(note: String): Array[String] = {
-    Array(
-      "C#", "D", "D#", "E",  "F",
-      "F#", "G",  "G#", "A", "A#", "B", "C"
-    )
+    val numbers = (0 until 12)
+
+    numbers.foldLeft(Array[String]()) { (acc, i) =>
+      if (i == 0) {
+         Array(noteMapper.getNextNote(note))
+      } else {
+        acc ++ Array(noteMapper.getNextNote(acc.last))
+      }
+    }
   }
 }
 
