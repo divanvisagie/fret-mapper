@@ -21,18 +21,17 @@ object FretMapperApp extends JFXApp {
     }
   }
 
-
-
   private val containerBox = new BorderPane {
     center = container
     top = new TuningSelector(noteViews).box
+    bottom = new NoteSelector(noteViews).box
   }
   containerBox.padding = Insets(10,10,10,10)
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Fret Mapper"
     width = 500
-    height = 200
+    height = 250
     scene = new Scene {
       root = containerBox
     }

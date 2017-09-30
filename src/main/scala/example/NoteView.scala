@@ -26,6 +26,15 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
     val stringCount = _guitar.strings.length
     stringCount - stringNumber
   }
+
+  def highlight(note: String): Unit = {
+    if (fretNumber == 0) return
+    if (note == _guitar.getFret(fretNumber)(stringNumber)) {
+      holder.setStyle("-fx-background-color: red;")
+    } else {
+      holder.setStyle("-fx-background-color: white;")
+    }
+  }
 }
 object NoteView {
   def apply(stringNumber: Int, fretNumber: Int): NoteView =

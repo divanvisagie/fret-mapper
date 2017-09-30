@@ -22,3 +22,20 @@ class TuningSelector(noteViews: IndexedSeq[NoteView]) {
     noteViews foreach(_.setGuitar(guitar))
   }
 }
+
+class NoteSelector(noteViews: IndexedSeq[NoteView]) {
+  val box = new HBox()
+  private val comboBox = new ComboBox[String]()
+  box.children.add(comboBox)
+  NoteMapper.noteOrder.foreach { note =>
+    comboBox += note
+  }
+  comboBox.onAction = handle {
+    val note = comboBox.getSelectionModel.getSelectedItem
+    noteViews.foreach { noteView =>
+      noteView.highlight(note)
+    }
+  }
+
+  comboBox.getSelectionModel.select(0)
+}

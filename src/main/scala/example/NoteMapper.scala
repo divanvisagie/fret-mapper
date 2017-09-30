@@ -3,9 +3,7 @@ package example
 
 class NoteMapper {
 
-  val noteOrder = Array(
-    "A", "A#", "B", "C", "C#", "D", "D#", "E",  "F", "F#", "G",  "G#"
-  )
+  import NoteMapper._
 
   def getNote(note: String, selector: (Int) => Int): String = {
     val noteIndex = noteOrder.indexOf(note.toUpperCase)
@@ -25,5 +23,8 @@ class NoteMapper {
 
 object NoteMapper {
   def apply(): NoteMapper = new NoteMapper()
+  val noteOrder = Array(
+    "A", "A#", "B", "C", "C#", "D", "D#", "E",  "F", "F#", "G",  "G#"
+  )
 }
 
