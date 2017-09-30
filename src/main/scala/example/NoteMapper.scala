@@ -4,8 +4,7 @@ package example
 class NoteMapper {
 
   val noteOrder = Array(
-    "C#", "D", "D#", "E",  "F",
-    "F#", "G",  "G#", "A", "A#", "B", "C"
+    "A", "A#", "B", "C", "C#", "D", "D#", "E",  "F", "F#", "G",  "G#"
   )
 
   def getNote(note: String, selector: (Int) => Int): String = {

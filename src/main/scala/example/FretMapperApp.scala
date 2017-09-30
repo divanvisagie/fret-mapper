@@ -21,6 +21,8 @@ object FretMapperApp extends JFXApp {
     }
   }
 
+
+
   private val containerBox = new BorderPane {
     center = container
     top = new TuningSelector(noteViews).box
