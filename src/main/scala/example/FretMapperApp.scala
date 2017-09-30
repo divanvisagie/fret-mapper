@@ -54,7 +54,7 @@ object FretMapperApp extends JFXApp {
   }
 
   stage = new JFXApp.PrimaryStage {
-    title.value = "Hello World"
+    title.value = "Fret Mapper"
     width = 500
     height = 500
     scene = new Scene {
