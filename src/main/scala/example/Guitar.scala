@@ -4,7 +4,7 @@ class Guitar(tuning: Array[String]) {
 
   val stringMapper = StringMapper()
 
-  val strings = tuning.map { stringNote =>
+  val strings: Array[Array[String]] = tuning.map { stringNote =>
     stringMapper.getStringStartingWith(stringNote)
   }
 
