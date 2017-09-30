@@ -4,6 +4,7 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control._
@@ -18,21 +19,30 @@ object FretMapperApp extends JFXApp {
 
   private val guitar = Guitar.standardE
 
-  val container = new GridPane()
+  private val container = new GridPane()
 
-  val noteViews = (0 to 12).flatMap { fret =>
+  private val noteViews = (0 to 12).flatMap { fret =>
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
       val noteView = NoteView(indexedNote._2, fret)
       noteView.setGuitar(guitar)
       container.add(noteView.holder, fret, noteView.columnPosition)
       noteView
     }
-
   }
 
   noteViews.foreach(_.setGuitar(Guitar.standardC))
 
+  val tuningSelector = new ComboBox[String]()
+  tuningSelector += "Standard E"
+  tuningSelector += "Standard C"
 
+  tuningSelector.onAction = (_: ActionEvent) => {
+    val newGuitarType = tuningSelector.getSelectionModel.getSelectedItem match {
+      case "Standard C" => Guitar.standardC
+      case _ => Guitar.standardE
+    }
+    noteViews foreach(_.setGuitar(newGuitarType))
+  }
 
   val testButton = new Button("Say Hello")
   testButton.onAction = (_: ActionEvent) => {
@@ -47,7 +57,9 @@ object FretMapperApp extends JFXApp {
 
   private val containerBox = new BorderPane {
     center = container
+    top = tuningSelector
   }
+  containerBox.padding = Insets(10,10,10,10)
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Fret Mapper"
