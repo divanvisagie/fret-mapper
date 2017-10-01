@@ -27,11 +27,19 @@ object NoteMapper {
     "A", "A#", "B", "C", "C#", "D", "D#", "E",  "F", "F#", "G",  "G#"
   )
 
-  val keys: Map[String, Array[String]] = Map[String,Array[String]](
-    "A" -> Array("A", "B", "C#", "D", "E", "F#", "G#"),
-    "A#" -> Array("A#" ,"C", "D", "D#", "F", "G", "A"),
-    "B" -> Array("B", "C#", "D#", "E", "F#", "G#", "A#"),
-    "C" -> Array("C", "D", "E", "F", "G", "A", "B", "C")
+  val keys: Map[String, Seq[String]] = Map[String,Seq[String]](
+    "A" -> Seq("A", "B", "C#", "D", "E", "F#", "G#"),
+    "A#" -> Seq("A#" ,"C", "D", "D#", "F", "G", "A"),
+    "B" -> Seq("B", "C#", "D#", "E", "F#", "G#", "A#"),
+    "C" -> Seq("C", "D", "E", "F", "G", "A", "B", "C"),
+    "C#" -> Seq("C#", "D#", "E#", "F#", "G#", "A#", "B#", "C#"),
+    "D" -> Seq("D", "E", "F#", "G", "A", "B", "C#"),
+    "D#" -> Seq("D#", "F" ,"G", "G#" ,"A#" ,"C", "D"),
+    "E" -> Seq("E", "F#", "G#", "A", "B", "C#", "D#"),
+    "F" -> Seq("F","G", "A", "A#", "C", "D", "E"),
+    "F#" -> Seq("F#", "G#", "A#", "B", "C#", "D#", "E#"),
+    "G" -> Seq("G", "A", "B", "C" ,"D" ,"E", "F#"),
+    "G#" -> Seq("G#", "A#", "C" ,"C#", "D#", "F", "G")
   )
 }
 
