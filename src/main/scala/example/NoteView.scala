@@ -15,6 +15,8 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
   holder.setMinWidth(32)
   holder.center = label
 
+  def currentNote: String = _guitar.getFret(fretNumber)(stringNumber)
+
   def clearHighlights(): Unit = {
     if (fretNumber == 0) return
     holder.setStyle("-fx-background-color: white;")
@@ -34,10 +36,20 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
 
   def highlight(note: String): Unit = {
     if (fretNumber == 0) return
-    if (note == _guitar.getFret(fretNumber)(stringNumber)) {
+    if (note == currentNote) {
       holder.setStyle("-fx-background-color: red;")
     } else {
       holder.setStyle("-fx-background-color: white;")
+    }
+  }
+
+  def highlightKey(key: Seq[String]): Unit = {
+    if (fretNumber == 0) return
+
+    key.foreach { note =>
+      if (note == currentNote) {
+        holder.setStyle("-fx-background-color: cyan;")
+      }
     }
   }
 }

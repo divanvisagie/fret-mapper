@@ -11,6 +11,18 @@ class NoteSelector(noteViews: IndexedSeq[NoteView]) {
   val keyLabel = new Label("")
   val checkbox = new CheckBox("Highlight Key")
 
+  def note: String = comboBox.getSelectionModel.getSelectedItem
+
+  def key: Seq[String] = NoteMapper.keys.getOrElse(note,Seq[String]())
+
+  checkbox.onAction = handle {
+    if(checkbox.selected.value) {
+      noteViews.foreach { nv =>
+        nv.highlightKey(key)
+      }
+    }
+  }
+
   val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
   keyLabel.padding = labelPadding
@@ -22,7 +34,6 @@ class NoteSelector(noteViews: IndexedSeq[NoteView]) {
     comboBox += note
   }
   comboBox.onAction = handle {
-    val note = comboBox.getSelectionModel.getSelectedItem
     noteViews.foreach { noteView =>
       noteView.highlight(note)
     }
@@ -30,6 +41,7 @@ class NoteSelector(noteViews: IndexedSeq[NoteView]) {
       NoteMapper.keys.getOrElse(note,Seq[String]()).mkString(", ")
 
     keyLabel.setText(keyText)
+    checkbox.selected = false
   }
   comboBox.getSelectionModel.select(0)
 
