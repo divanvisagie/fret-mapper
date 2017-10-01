@@ -1,3 +1,7 @@
+machine:
+    java:
+        version: oraclejdk8
+
 dependencies:
   pre:
     - wget -q https://dl.bintray.com/sbt/debian/sbt-0.13.16.deb
