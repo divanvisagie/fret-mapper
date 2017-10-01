@@ -5,3 +5,11 @@ dependencies:
   cache_directories:
     - "~/.ivy2"
     - "~/.sbt"
+
+general:
+  artifacts:
+    - "target/jdkpackager" # relative to the build directory
+
+build:
+  post:
+    - sbt jdkPackager:packageBin
