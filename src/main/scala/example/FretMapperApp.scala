@@ -23,8 +23,8 @@ object FretMapperApp extends JFXApp {
 
   private val containerBox = new BorderPane {
     center = container
-    top = new TuningSelector(noteViews).box
-    bottom = new NoteSelector(noteViews).box
+    top = TuningSelector(noteViews).box
+    bottom = NoteSelector(noteViews).box
   }
   containerBox.padding = Insets(10,10,10,10)
 
