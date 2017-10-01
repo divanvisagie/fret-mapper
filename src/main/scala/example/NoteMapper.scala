@@ -26,5 +26,12 @@ object NoteMapper {
   val noteOrder = Array(
     "A", "A#", "B", "C", "C#", "D", "D#", "E",  "F", "F#", "G",  "G#"
   )
+
+  val keys: Map[String, Array[String]] = Map[String,Array[String]](
+    "A" -> Array("A", "B", "C#", "D", "E", "F#", "G#"),
+    "A#" -> Array("A#" ,"C", "D", "D#", "F", "G", "A"),
+    "B" -> Array("B", "C#", "D#", "E", "F#", "G#", "A#"),
+    "C" -> Array("C", "D", "E", "F", "G", "A", "B", "C")
+  )
 }
 
