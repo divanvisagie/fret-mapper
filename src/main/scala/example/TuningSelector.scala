@@ -2,12 +2,16 @@ package example
 
 import scalafx.Includes._
 import scalafx.geometry.Insets
-import scalafx.scene.control.ComboBox
+import scalafx.scene.control.{ComboBox, Label}
 import scalafx.scene.layout.HBox
 
 class TuningSelector(noteViews: IndexedSeq[NoteView]) {
 
   val box = new HBox()
+  val label = new Label("Guitar Tuning:")
+  label.padding = Insets(2,10,5,5)
+  box.children.add(label)
+
   private val combobox = new ComboBox[String]()
   Guitar.tuningsMap.keys.foreach { key =>
     combobox += key

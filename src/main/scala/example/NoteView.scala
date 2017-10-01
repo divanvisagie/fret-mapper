@@ -15,8 +15,13 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
   holder.setMinWidth(32)
   holder.center = label
 
+  def clearHighlights(): Unit = {
+    if (fretNumber == 0) return
+    holder.setStyle("-fx-background-color: white;")
+  }
 
   def setGuitar(guitar: Guitar): Unit = {
+    clearHighlights()
     _guitar = guitar
     val note = guitar.getFret(fretNumber)(stringNumber)
     label.setText(note)
