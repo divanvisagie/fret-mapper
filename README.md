@@ -1,4 +1,5 @@
 # fret-mapper 
+[![CircleCI](https://circleci.com/gh/divanvisagie/fret-mapper.svg?style=svg)](https://circleci.com/gh/divanvisagie/fret-mapper)
 
 ![Screenshot](docs/images/screenshot.png)
 
