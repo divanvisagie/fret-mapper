@@ -7,7 +7,7 @@ Map the notes of frets in different tunings
 ## Building 
 
 ```sh
-sbt universal:packageBin
+sbt jdkPackager:packageBin
 ```
 
-Will publish to `target/universal/`
+[Download](https://github.com/divanvisagie/fret-mapper/releases)
