@@ -8,7 +8,7 @@ dependencies:
 
 general:
   artifacts:
-    - "target/jdkpackager" # relative to the build directory
+    - "target/universal/jdkpackager" # relative to the build directory
 
 test:
   post:
