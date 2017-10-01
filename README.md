@@ -10,4 +10,9 @@ Map the notes of frets in different tunings
 sbt jdkPackager:packageBin
 ```
 
+```sh
+ghr -u divanvisagie v[version number] target/upload
+```
+`-prerelease` flag to be used in pre releases
+
 [Download](https://github.com/divanvisagie/fret-mapper/releases)
