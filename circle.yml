@@ -12,7 +12,7 @@ dependencies:
 
 general:
   artifacts:
-    - "target/universal/jdkpackager" # relative to the build directory
+    - "target/universal/jdkpackager/bundles" # relative to the build directory
 
 test:
   post:
