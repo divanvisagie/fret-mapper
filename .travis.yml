@@ -45,4 +45,4 @@ deploy:
       ghr -u divanvisagie $TRAVIS_TAG target/universal/jdkpackager/bundles
   skip_cleanup: true
   on:
-    condition: $TRAVIS_BRANCH == "master" || -n $TRAVIS_TAG
+    condition: $TRAVIS_BRANCH == "master" && -n $TRAVIS_TAG
