@@ -1,7 +1,7 @@
 
 organization := "com.example"
 scalaVersion := "2.12.3"
-version      := "0.0.13"
+version      := "0.0.14"
 maintainer   := "Divan Visagie"
 name := "Fret Mapper"
 
