@@ -26,6 +26,7 @@ object Guitar {
   val tuningsMap: Map[String,Array[String]] = Map[String,Array[String]](
     "Standard E" -> Array("E","A","D","G","B","E"),
     "Standard C" -> Array("C","F","A#","D#","G","C"),
-    "Drop C" -> Array("C","G","C","F","A","D")
+    "Drop C" -> Array("C","G","C","F","A","D"),
+    "Bass E" -> Array("E","A","D","G")
   )
 }

@@ -25,7 +25,7 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
   def setGuitar(guitar: Guitar): Unit = {
     clearHighlights()
     _guitar = guitar
-    val note = guitar.getFret(fretNumber)(stringNumber)
+    val note = guitar.getFret(fretNumber).lift(stringNumber).getOrElse("")
     label.setText(note)
   }
 

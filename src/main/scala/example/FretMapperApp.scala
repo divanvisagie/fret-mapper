@@ -14,8 +14,11 @@ object FretMapperApp extends JFXApp {
   private val container = new GridPane()
 
   private val noteViews = (0 to 12).flatMap { fret =>
+    val holder = new BorderPane()
+    holder.setMinWidth(32)
     val label = new Label(s"$fret")
-    container.add(label,fret,0)
+    holder.center = label
+    container.add(holder,fret,0)
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
       val noteView = NoteView(indexedNote._2, fret)
       noteView.setGuitar(guitar)
