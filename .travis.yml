@@ -14,12 +14,13 @@ matrix:
   include:
     - jdk: oraclejdk8
       language: scala
-      # env: SBT_TEST_CMD="^validate"
       # oraclejdk8 is not yet available.
       # see https://github.com/travis-ci/travis-ci/issues/2316
     - os: osx
-      # env: SBT_VERSION_CMD="^validate ^validateUniversal"
       osx_image: xcode8
+
+script:
+  - sbt test
 
 sudo: false
 cache:
