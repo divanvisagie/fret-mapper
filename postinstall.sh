@@ -2,7 +2,7 @@
 
 if [[ $TRAVIS_BRANCH == "master" && -n $TRAVIS_TAG ]]; then
     echo "valid";
-    sbt jdkPackager:packageBin
+    sbt jdkPackager:packageBin;
     if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
         brew tap tcnksm/ghr;
         brew install ghr;
