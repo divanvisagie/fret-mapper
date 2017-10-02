@@ -3,6 +3,7 @@ package example
 import scalafx.application.JFXApp
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
+import scalafx.scene.control.Label
 import scalafx.scene.layout.{BorderPane, GridPane}
 
 
@@ -13,10 +14,12 @@ object FretMapperApp extends JFXApp {
   private val container = new GridPane()
 
   private val noteViews = (0 to 12).flatMap { fret =>
+    val label = new Label(s"$fret")
+    container.add(label,fret,0)
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
       val noteView = NoteView(indexedNote._2, fret)
       noteView.setGuitar(guitar)
-      container.add(noteView.holder, fret, noteView.columnPosition)
+      container.add(noteView.holder, fret, noteView.columnPosition+1)
       noteView
     }
   }
