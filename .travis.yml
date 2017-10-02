@@ -41,7 +41,7 @@ after_success:
           chmod +x ~/bin/gimme;
           go get -u github.com/tcnksm/ghr;
       fi
-      ghr -u divanvisagie $TRAVIS_TAG target/universal/jdkpackager/bundles
+      ghr -u divanvisagie $TRAVIS_TAG target/universal/jdkpackager/bundles;
     else
       echo "TRAVIS_BRANCH" $TRAVIS_BRANCH;
       echo "TRAVIS_TAG" $TRAVIS;
