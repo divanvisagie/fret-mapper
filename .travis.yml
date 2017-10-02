@@ -11,6 +11,7 @@ before_install:
       brew tap tcnksm/ghr;
       brew install ghr;
     else
+      sudo apt-get install -y fakeroot;
       curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme;
       chmod +x ~/bin/gimme;
       go get -u github.com/tcnksm/ghr; 
