@@ -1,0 +1,11 @@
+os:
+  - linux
+  - osx
+
+language: scala
+scala:
+  - 2.12.3
+
+script:
+  - sbt compile
+  - sbt test
