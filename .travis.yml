@@ -29,12 +29,11 @@ cache:
   - $HOME/.sbt
   - $HOME/.ivy2
 
-deploy:
-  provider: script
-  script:
-    - echo "I want to deploy"
-    - sbt jdkPackager:packageBin
-    - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
+after_success:
+  - if [[ $TRAVIS_BRANCH == "master" && -n $TRAVIS_TAG ]]; then 
+      echo "valid"; 
+      sbt jdkPackager:packageBin
+      if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
         brew tap tcnksm/ghr;
         brew install ghr;
       else
@@ -43,6 +42,7 @@ deploy:
           go get -u github.com/tcnksm/ghr;
       fi
       ghr -u divanvisagie $TRAVIS_TAG target/universal/jdkpackager/bundles
-  skip_cleanup: true
-  on:
-    condition: $TRAVIS_BRANCH == "master" && -n $TRAVIS_TAG
+    else
+      echo "TRAVIS_BRANCH" $TRAVIS_BRANCH;
+      echo "TRAVIS_TAG" $TRAVIS;
+    fi
