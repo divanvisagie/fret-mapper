@@ -6,6 +6,12 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
       brew update;
       brew install sbt;
+      brew tap tcnksm/ghr;
+      brew install ghr;
+    else 
+      curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme;
+      chmod +x ~/bin/gimme;
+      go get -u github.com/tcnksm/ghr; 
     fi
 
 script: sbt "$SBT_TEST_CMD";
