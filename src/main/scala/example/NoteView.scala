@@ -10,8 +10,9 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
 
   val holder = new BorderPane()
   if (fretNumber > 0) {
-    holder.setStyle("-fx-background-color: white;")
+    holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 0 1; -fx-border-color: white black white black;")
   }
+  holder.setStyle("-fx-border-width: 0 2 0 1; -fx-border-color: white black white black;")
   holder.setMinWidth(32)
   holder.center = label
 
@@ -19,14 +20,14 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
 
   def clearHighlights(): Unit = {
     if (fretNumber == 0) return
-    holder.setStyle("-fx-background-color: white;")
+    holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;")
   }
 
   def setGuitar(guitar: Guitar): Unit = {
     clearHighlights()
     _guitar = guitar
     val note = guitar.getFret(fretNumber).lift(stringNumber).getOrElse("")
-    label.setText(note)
+    label.setText(s" $note ")
   }
 
   def columnPosition: Int = {
@@ -39,7 +40,7 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
     if (note == currentNote) {
       holder.setStyle("-fx-background-color: red;")
     } else {
-      holder.setStyle("-fx-background-color: white;")
+      holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;")
     }
   }
 
