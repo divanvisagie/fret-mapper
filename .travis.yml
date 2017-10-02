@@ -24,15 +24,15 @@ script:
 
 sudo: false
 cache:
- apt: true
- directories:
- - $HOME/.sbt
- - $HOME/.ivy2
+  apt: true
+  directories:
+  - $HOME/.sbt
+  - $HOME/.ivy2
 
-
-after_success:
-  - if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-      echo "This will deploy!"
-    else
-      echo "This will not deploy!"
-    fi
+deploy:
+  provider: script
+  script:
+    - echo "I want to deploy"
+  skip_cleanup: true
+  on:
+    condition: $TRAVIS_BRANCH == "master" || -n $TRAVIS_TAG
