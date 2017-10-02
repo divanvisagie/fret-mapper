@@ -1,6 +1,12 @@
 #!/bin/sh
 
-echo "valid"
-sbt jdkPackager:packageBin
-echo "tag" $TRAVIS_TAG
-ghr -u divanvisagie $TRAVIS_TAG target/universal/jdkpackager/bundles
+if git describe --exact-match --tags HEAD
+then
+    echo "Found tag"
+      tag=$(git describe --exact-match --tags HEAD)
+    echo "Found tag $tag"
+    sbt jdkPackager:packageBin
+    ghr -u divanvisagie $tag target/universal/jdkpackager/bundles
+else
+    echo "Tag not found"
+fi

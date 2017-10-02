@@ -36,11 +36,4 @@ cache:
   - $HOME/.ivy2
 
 after_success:
-  - if [[ $TRAVIS_BRANCH == "master" && -n $TRAVIS_TAG ]]; then 
-      echo "valid"; 
-      sbt jdkPackager:packageBin;
-      ghr -u divanvisagie $TRAVIS_TAG target/universal/jdkpackager/bundles;
-    else
-      echo "TRAVIS_BRANCH" $TRAVIS_BRANCH;
-      echo "TRAVIS_TAG" $TRAVIS;
-    fi
+  - sh deploy.sh
