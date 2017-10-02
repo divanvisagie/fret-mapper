@@ -7,6 +7,7 @@ before_install:
       brew update;
       brew install sbt;
     fi
+
 script: sbt "$SBT_TEST_CMD";
 
 # We explicitly set the matrix to include oraclejdk8 because MacOS X has issues. See comment below
@@ -29,5 +30,9 @@ cache:
   - $HOME/.sbt
   - $HOME/.ivy2
 
-after_success:
-  - sh postinstall.sh
+deploy:
+  provider: script
+  script: sh deploy.sh
+  on:
+    tags: true
+    condition: "$TRAVIS_TAG =~ ^v[0-9].[0-9].[0-9]$"
