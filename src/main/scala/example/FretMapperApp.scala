@@ -1,5 +1,7 @@
 package example
 
+import javafx.application.Application
+
 import scalafx.application.JFXApp
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
@@ -42,5 +44,7 @@ object FretMapperApp extends JFXApp {
       root = containerBox
     }
   }
+
+
 }
 

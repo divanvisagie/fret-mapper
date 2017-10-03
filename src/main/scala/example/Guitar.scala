@@ -2,13 +2,22 @@ package example
 
 class Guitar(tuning: Array[String]) {
 
-  val stringMapper = StringMapper()
+  private val stringMapper = StringMapper()
 
-  val strings: Array[Array[String]] = tuning.map { stringNote =>
-    stringMapper.getStringStartingWith(stringNote)
+  /**
+    * Contains a Sequence representing guitar strings which contains another
+    * sequence of Strings the index representing the fret number and the value
+    * representing the note
+    * */
+  val strings: Seq[Seq[String]] = tuning.toSeq.map { stringNote =>
+    stringMapper.getStringStartingWith(stringNote).toSeq
   }
 
-  def getFret(number: Int): Array[String] = {
+  /**
+    * Gets the tuning for each string on a fret of the guitar as a Sequence of
+    * notes
+    * */
+  def getFret(number: Int): Seq[String] = {
     if (number == 0) {
       tuning
     } else {
@@ -20,9 +29,22 @@ class Guitar(tuning: Array[String]) {
 }
 object Guitar {
   def apply(tuning: Array[String]): Guitar = new Guitar(tuning)
+
+  /**
+    * Creates a new 6 string guitar with standard E tuning
+    * */
   def standardE: Guitar = new Guitar(Array("E","A","D","G","B","E"))
+
+
+  /**
+    * Creates a new 6 string guitar with standard C tuning
+    * */
   def standardC: Guitar = new Guitar(Array("C","F","A#","D#","G","C"))
 
+  /**
+    * A map key value store where key is the Guitar tuning and the value is an
+    * array containing the notes it is tuned to
+    * */
   val tuningsMap: Map[String,Array[String]] = Map[String,Array[String]](
     "Standard E" -> Array("E","A","D","G","B","E"),
     "Standard C" -> Array("C","F","A#","D#","G","C"),
