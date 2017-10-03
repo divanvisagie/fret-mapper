@@ -1,6 +1,7 @@
 # fret-mapper 
 [![CircleCI](https://circleci.com/gh/divanvisagie/fret-mapper.svg?style=svg)](https://circleci.com/gh/divanvisagie/fret-mapper)
 [![Build Status](https://travis-ci.org/divanvisagie/fret-mapper.svg?branch=master)](https://travis-ci.org/divanvisagie/fret-mapper)
+[![Build status](https://ci.appveyor.com/api/projects/status/shxl94wa7udys7ti?svg=true)](https://ci.appveyor.com/project/divanvisagie/fret-mapper)
 
 ![Screenshot](docs/images/screenshot.png)
 
