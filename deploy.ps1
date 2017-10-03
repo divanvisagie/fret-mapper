@@ -7,7 +7,7 @@ if ($tag -like '*undefined*') {
 } else {
   Write-Output "Tag is $tag, Initiating deployment process"
   mkdir .\Tools
-  $path = "C:\projects\fret-mapper\Tools"
+  $path = ".\Tools"
   $file = "$path\ghr.zip"
   
   
