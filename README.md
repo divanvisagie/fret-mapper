@@ -18,4 +18,4 @@ ghr -u divanvisagie v[version number] target/upload
 ```
 `-prerelease` flag to be used in pre releases
 
-[Download](https://github.com/divanvisagie/fret-mapper/releases/tag/v0.0.2)
+[Download](https://github.com/divanvisagie/fret-mapper/releases/tag/v0.0.16)
