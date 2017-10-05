@@ -1,4 +1,6 @@
-package example
+package example.views
+
+import example.core.Guitar
 
 import scalafx.application.JFXApp
 import scalafx.geometry.Insets
@@ -30,7 +32,7 @@ object FretMapperApp extends JFXApp {
   private val containerBox = new BorderPane {
     center = container
     top = TuningSelector(noteViews).box
-    bottom = FocusNoteSelector(noteViews).box
+    bottom = FocusNoteSelector(noteViews).container
   }
   containerBox.padding = Insets(10,10,10,10)
 

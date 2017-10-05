@@ -1,4 +1,6 @@
-package example
+package example.views
+
+import example.core.Guitar
 
 import scalafx.scene.control._
 import scalafx.scene.layout.BorderPane
@@ -53,7 +55,7 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
     * */
   def highlight(note: String): Unit = {
     if (fretNumber == 0) return
-    if (note == note) {
+    if (note == this.note) {
       holder.setStyle("-fx-background-color: red;")
     } else {
       holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;")

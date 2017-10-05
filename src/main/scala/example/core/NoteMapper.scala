@@ -1,31 +1,10 @@
-package example
+package example.core
 
 
-class NoteMapper {
-  import NoteMapper._
-
-  private def getNote(note: String, selector: (Int) => Int): String = {
-    val noteIndex = noteOrder.indexOf(note.toUpperCase)
-    val nextIndex = if (noteIndex == noteOrder.length-1) {
-      0
-    } else {
-      selector(noteIndex)
-    }
-    noteOrder(nextIndex)
-  }
-
-  /**
-    * get the note that comes after the specified note
-    * */
-  def next(note: String): String = {
-    getNote(note, {x => x + 1})
-  }
-
-}
-
+/**
+  * Utilities for mapping notes
+  * */
 object NoteMapper {
-  def apply(): NoteMapper = new NoteMapper()
-
   /**
     * Sequence representing the order of notes
     * */
@@ -51,5 +30,22 @@ object NoteMapper {
     "G" -> Seq("G", "A", "B", "C" ,"D" ,"E", "F#"),
     "G#" -> Seq("G#", "A#", "C" ,"C#", "D#", "F", "G")
   )
+
+  private def getNote(note: String, selector: (Int) => Int): String = {
+    val noteIndex = noteOrder.indexOf(note.toUpperCase)
+    val nextIndex = if (noteIndex == noteOrder.length-1) {
+      0
+    } else {
+      selector(noteIndex)
+    }
+    noteOrder(nextIndex)
+  }
+
+  /**
+    * get the note that comes after the specified note
+    * */
+  def next(note: String): String = {
+    getNote(note, {x => x + 1})
+  }
 }
 

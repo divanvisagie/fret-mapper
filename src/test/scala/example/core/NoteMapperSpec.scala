@@ -1,13 +1,12 @@
-package example
+package example.core
 
 import org.scalatest.{FlatSpec, Matchers}
 
 class NoteMapperSpec extends FlatSpec with Matchers {
-  val noteMapper = NoteMapper()
 
   def testNextNote(note: String, nextNote: String): Unit = {
     s"getNextNote $note" should s"return $nextNote" in {
-      noteMapper.next(note) should be (nextNote)
+      NoteMapper.next(note) should be (nextNote)
     }
   }
   testNextNote("A","A#")

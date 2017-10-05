@@ -1,4 +1,4 @@
-package example
+package example.core
 
 import org.scalatest.{FlatSpec, Matchers}
 

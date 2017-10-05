@@ -1,4 +1,4 @@
-package example
+package example.core
 
 class Guitar(tuning: Seq[String]) {
 

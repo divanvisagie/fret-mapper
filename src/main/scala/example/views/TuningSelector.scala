@@ -1,4 +1,6 @@
-package example
+package example.views
+
+import example.core.Guitar
 
 import scalafx.Includes._
 import scalafx.geometry.Insets

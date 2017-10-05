@@ -1,7 +1,11 @@
-package example
+package example.views
+
+
+import example.core.NoteMapper
 
 import scalafx.Includes.handle
 import scalafx.geometry.Insets
+import scalafx.scene.Node
 import scalafx.scene.control.{CheckBox, ComboBox, Label}
 import scalafx.scene.layout.HBox
 
@@ -9,10 +13,13 @@ import scalafx.scene.layout.HBox
   * Creates a view that selects a focus note
   * */
 class FocusNoteSelector(noteViews: IndexedSeq[NoteView]) {
-  val box = new HBox()
-  val label = new Label("Highlight Note:")
-  val keyLabel = new Label("")
-  val checkbox = new CheckBox("Highlight Key")
+  private val hbox = new HBox()
+
+  private val label = new Label("Highlight Note:")
+  private val keyLabel = new Label("")
+  private val checkbox = new CheckBox("Highlight Key")
+
+  def container: Node = hbox
 
   def note: String = comboBox.getSelectionModel.getSelectedItem
 
@@ -48,10 +55,10 @@ class FocusNoteSelector(noteViews: IndexedSeq[NoteView]) {
   }
   comboBox.getSelectionModel.select(0)
 
-  box.children.add(label)
-  box.children.add(comboBox)
-  box.children.add(keyLabel)
-  box.children.add(checkbox)
+  hbox.children.add(label)
+  hbox.children.add(comboBox)
+  hbox.children.add(keyLabel)
+  hbox.children.add(checkbox)
 }
 
 object FocusNoteSelector {
