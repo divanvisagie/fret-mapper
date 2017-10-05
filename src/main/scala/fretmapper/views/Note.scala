@@ -70,7 +70,7 @@ class Note(stringNumber: Int, fretNumber: Int) {
     if (fretNumber == 0) return
 
     key.foreach { note =>
-      if (note == note) {
+      if (note == this.note) {
         holder.setStyle("-fx-background-color: cyan;")
       }
     }
