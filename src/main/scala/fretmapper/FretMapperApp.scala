@@ -25,7 +25,7 @@ object FretMapperApp extends JFXApp {
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
       val noteView = Note(indexedNote._2, fret)
       noteView.changeTuning(guitar)
-      container.add(noteView.holder, fret, noteView.columnPosition+1)
+      container.add(noteView.container, fret, noteView.columnPosition+1)
       noteView
     }
   }

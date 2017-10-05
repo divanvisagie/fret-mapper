@@ -2,6 +2,7 @@ package fretmapper.views
 
 import fretmapper.core.{Guitar, NoteMapper}
 
+import scalafx.scene.Node
 import scalafx.scene.control._
 import scalafx.scene.layout.BorderPane
 
@@ -19,11 +20,10 @@ class Note(stringNumber: Int, fretNumber: Int) {
 
   private var highlightedNote = ""
 
-  val holder = new BorderPane()
-  if (fretNumber > 0) {
-    holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 0 1; -fx-border-color: white black white black;")
-  }
-  holder.setStyle("-fx-border-width: 0 2 0 1; -fx-border-color: white black white black;")
+  private val holder = new BorderPane()
+
+  def container: Node = holder
+
   holder.setMinWidth(32)
   holder.center = label
 
@@ -34,7 +34,7 @@ class Note(stringNumber: Int, fretNumber: Int) {
 
   def clearHighlights(): Unit = {
     if (fretNumber == 0) return
-    holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;")
+    style()
   }
 
   /**
@@ -61,15 +61,30 @@ class Note(stringNumber: Int, fretNumber: Int) {
     style()
   }
 
-  private val fretStyle = Map[String,String](
-    "Red" -> "-fx-background-color: red; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;",
-    "White" -> "-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;",
-    "Blue" -> "-fx-background-color: cyan; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;"
-  )
 
 
-  def style(): Unit = {
-    holder.setStyle(fretStyle("White"))
+  private def fretStyle(str: String): String = {
+    val fretStyleMap = Map[String,String](
+      "Red" -> "-fx-background-color: red;",
+      "White" -> "-fx-background-color: white;",
+      "Blue" -> "-fx-background-color: cyan;"
+    )
+
+
+    if (fretNumber == 0) {
+      s"${fretStyleMap(str)} fx-border-width: 0 1 0 0; -fx-border-color: transparent black transparent transparent;"
+    } else {
+      s"${fretStyleMap(str)} -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;"
+    }
+  }
+
+
+  private def style(): Unit = {
+    if (fretNumber == 0) {
+      holder.setStyle("")
+    } else {
+      holder.setStyle(fretStyle("White"))
+    }
     NoteMapper.keys.getOrElse(highlightedNote, Seq("")).foreach { x =>
       if (x == note) {
         holder.setStyle(fretStyle("Blue"))
@@ -78,8 +93,14 @@ class Note(stringNumber: Int, fretNumber: Int) {
     if (highlightedNote == note) {
         holder.setStyle(fretStyle("Red"))
     }
-
+    if (note == "") {
+      holder.visible = false
+    } else {
+      holder.visible = true
+    }
   }
+
+  val height: Double = holder.getMaxHeight
 }
 object Note {
   def apply(stringNumber: Int, fretNumber: Int): Note =
