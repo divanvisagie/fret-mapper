@@ -17,7 +17,6 @@ class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
 
   private val label = new Label("Highlight Note:")
   private val keyLabel = new Label("")
-  private val checkbox = new CheckBox("Highlight Key")
 
   def container: Node = hbox
 
@@ -25,18 +24,10 @@ class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
 
   private def key: Seq[String] = NoteMapper.keys.getOrElse(note,Seq[String]())
 
-  checkbox.onAction = handle {
-    if(checkbox.selected.value) {
-      noteViews.foreach { nv =>
-        nv.highlightKey(key)
-      }
-    }
-  }
 
   val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
   keyLabel.padding = labelPadding
-  checkbox.padding = Insets(3,5,3,3)
 
   private val comboBox = new ComboBox[String]()
   comboBox += "None"
@@ -50,15 +41,13 @@ class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
     val keyText =
       NoteMapper.keys.getOrElse(note,Seq[String]()).mkString(", ")
 
-    keyLabel.setText(keyText)
-    checkbox.selected = false
+    keyLabel.setText(s"Key: $keyText")
   }
   comboBox.getSelectionModel.select(0)
 
   hbox.children.add(label)
   hbox.children.add(comboBox)
   hbox.children.add(keyLabel)
-  hbox.children.add(checkbox)
 }
 
 object FocusNoteSelector {

@@ -9,7 +9,7 @@ class Guitar(tuning: Seq[String]) {
     * sequence of Strings the index representing the fret number and the value
     * representing the note
     * */
-  val strings: Seq[Seq[String]] = tuning.toSeq.map { stringNote =>
+  val strings: Seq[Seq[String]] = tuning.map { stringNote =>
     stringMapper.getStringStartingWith(stringNote).toSeq
   }
 

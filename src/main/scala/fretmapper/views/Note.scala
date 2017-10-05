@@ -1,6 +1,6 @@
 package fretmapper.views
 
-import fretmapper.core.Guitar
+import fretmapper.core.{Guitar, NoteMapper}
 
 import scalafx.scene.control._
 import scalafx.scene.layout.BorderPane
@@ -17,6 +17,8 @@ class Note(stringNumber: Int, fretNumber: Int) {
   private val label = new Label("")
   private var guitar: Guitar = Guitar.standardE
 
+  private var highlightedNote = ""
+
   val holder = new BorderPane()
   if (fretNumber > 0) {
     holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 0 1; -fx-border-color: white black white black;")
@@ -28,7 +30,7 @@ class Note(stringNumber: Int, fretNumber: Int) {
   /**
     * Note that this view currently represents
     * */
-  def note: String = guitar.getFret(fretNumber)(stringNumber)
+  def note: String = guitar.getFret(fretNumber).lift(stringNumber).getOrElse("")
 
   def clearHighlights(): Unit = {
     if (fretNumber == 0) return
@@ -43,6 +45,7 @@ class Note(stringNumber: Int, fretNumber: Int) {
     guitar = g
     val note = g.getFret(fretNumber).lift(stringNumber).getOrElse("")
     label.setText(s" $note ")
+    style()
   }
 
   def columnPosition: Int = {
@@ -54,26 +57,28 @@ class Note(stringNumber: Int, fretNumber: Int) {
     * Highlight this note if it is the same as the note it is being passed
     * */
   def highlight(note: String): Unit = {
-    if (fretNumber == 0) return
-    if (note == this.note) {
-      holder.setStyle("-fx-background-color: red;")
-    } else {
-      holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;")
-    }
+    highlightedNote = note
+    style()
   }
 
+  private val fretStyle = Map[String,String](
+    "Red" -> "-fx-background-color: red; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;",
+    "White" -> "-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;",
+    "Blue" -> "-fx-background-color: cyan; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;"
+  )
 
-  /**
-    * Highlight this note if it is one of the notes in this key
-    * */
-  def highlightKey(key: Seq[String]): Unit = {
-    if (fretNumber == 0) return
 
-    key.foreach { note =>
-      if (note == this.note) {
-        holder.setStyle("-fx-background-color: cyan;")
+  def style(): Unit = {
+    holder.setStyle(fretStyle("White"))
+    NoteMapper.keys.getOrElse(highlightedNote, Seq("")).foreach { x =>
+      if (x == note) {
+        holder.setStyle(fretStyle("Blue"))
       }
     }
+    if (highlightedNote == note) {
+        holder.setStyle(fretStyle("Red"))
+    }
+
   }
 }
 object Note {
