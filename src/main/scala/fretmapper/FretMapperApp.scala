@@ -40,7 +40,7 @@ object FretMapperApp extends JFXApp {
   stage = new JFXApp.PrimaryStage {
     title.value = "Fret Mapper"
     width = 500
-    height = 250
+    height = 270
     scene = new Scene {
       root = containerBox
     }
