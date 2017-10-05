@@ -12,7 +12,7 @@ import scalafx.scene.layout.HBox
 /**
   * Creates a view that selects a focus note
   * */
-class FocusNoteSelector(noteViews: IndexedSeq[NoteView]) {
+class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
   private val hbox = new HBox()
 
   private val label = new Label("Highlight Note:")
@@ -62,6 +62,6 @@ class FocusNoteSelector(noteViews: IndexedSeq[NoteView]) {
 }
 
 object FocusNoteSelector {
-  def apply(noteViews: IndexedSeq[NoteView]): FocusNoteSelector =
+  def apply(noteViews: IndexedSeq[Note]): FocusNoteSelector =
     new FocusNoteSelector(noteViews)
 }

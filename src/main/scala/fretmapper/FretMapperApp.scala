@@ -1,6 +1,7 @@
-package fretmapper.views
+package fretmapper
 
 import fretmapper.core.Guitar
+import fretmapper.views.{FocusNoteSelector, Note, TuningSelector}
 
 import scalafx.application.JFXApp
 import scalafx.geometry.Insets
@@ -22,7 +23,7 @@ object FretMapperApp extends JFXApp {
     holder.center = label
     container.add(holder,fret,0)
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
-      val noteView = NoteView(indexedNote._2, fret)
+      val noteView = Note(indexedNote._2, fret)
       noteView.changeTuning(guitar)
       container.add(noteView.holder, fret, noteView.columnPosition+1)
       noteView
@@ -44,7 +45,5 @@ object FretMapperApp extends JFXApp {
       root = containerBox
     }
   }
-
-
 }
 

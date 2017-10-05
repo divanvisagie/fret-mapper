@@ -13,7 +13,7 @@ import scalafx.scene.layout.BorderPane
   * The NoteView is self aware of it's place on the fretboard, therefore it's value is
   * changed by changing the value of it's guitar's tuning
   * */
-class NoteView(stringNumber: Int, fretNumber: Int) {
+class Note(stringNumber: Int, fretNumber: Int) {
   private val label = new Label("")
   private var guitar: Guitar = Guitar.standardE
 
@@ -76,7 +76,7 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
     }
   }
 }
-object NoteView {
-  def apply(stringNumber: Int, fretNumber: Int): NoteView =
-    new NoteView(stringNumber, fretNumber)
+object Note {
+  def apply(stringNumber: Int, fretNumber: Int): Note =
+    new Note(stringNumber, fretNumber)
 }
