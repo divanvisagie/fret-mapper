@@ -23,7 +23,7 @@ class TuningSelector(noteViews: IndexedSeq[NoteView]) {
   combobox.onAction = handle {
     val key = combobox.getSelectionModel.getSelectedItem
     val guitar = Guitar(Guitar.tuningsMap(key))
-    noteViews foreach(_.setGuitar(guitar))
+    noteViews foreach(_.changeTuning(guitar))
   }
 }
 

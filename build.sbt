@@ -21,3 +21,6 @@ Attributed.blank(file(jh) / "lib/ext/jfxrt.jar")
 enablePlugins(JDKPackagerPlugin)
 jdkPackagerType := "installer"
 jdkPackagerToolkit := JavaFXToolkit
+
+
+
