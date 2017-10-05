@@ -21,7 +21,7 @@ object FretMapperApp extends JFXApp {
     holder.setMinWidth(32)
     val label = new Label(s"$fret")
     holder.center = label
-    container.add(holder,fret,0)
+    container.add(holder, fret, 0)
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
       val noteView = Note(indexedNote._2, fret)
       noteView.changeTuning(guitar)
@@ -35,7 +35,7 @@ object FretMapperApp extends JFXApp {
     top = TuningSelector(noteViews).box
     bottom = FocusNoteSelector(noteViews).container
   }
-  containerBox.padding = Insets(10,10,10,10)
+  containerBox.padding = Insets(10, 10, 10, 10)
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Fret Mapper"

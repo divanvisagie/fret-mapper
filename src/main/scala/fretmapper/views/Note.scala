@@ -99,8 +99,6 @@ class Note(stringNumber: Int, fretNumber: Int) {
       holder.visible = true
     }
   }
-
-  val height: Double = holder.getMaxHeight
 }
 object Note {
   def apply(stringNumber: Int, fretNumber: Int): Note =
