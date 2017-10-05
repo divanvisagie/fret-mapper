@@ -4,6 +4,13 @@ import scalafx.scene.control._
 import scalafx.scene.layout.BorderPane
 
 
+/**
+  * This class contains a view that is drawn at a certain point on the fretboard.
+  * It is designed so that it does not need to be destroyed when it's values change
+  *
+  * The NoteView is self aware of it's place on the fretboard, therefore it's value is
+  * changed by changing the value of it's guitar's tuning
+  * */
 class NoteView(stringNumber: Int, fretNumber: Int) {
   private val label = new Label("")
   private var guitar: Guitar = Guitar.standardE
@@ -16,7 +23,10 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
   holder.setMinWidth(32)
   holder.center = label
 
-  def currentNote: String = guitar.getFret(fretNumber)(stringNumber)
+  /**
+    * Note that this view currently represents
+    * */
+  def note: String = guitar.getFret(fretNumber)(stringNumber)
 
   def clearHighlights(): Unit = {
     if (fretNumber == 0) return
@@ -43,7 +53,7 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
     * */
   def highlight(note: String): Unit = {
     if (fretNumber == 0) return
-    if (note == currentNote) {
+    if (note == note) {
       holder.setStyle("-fx-background-color: red;")
     } else {
       holder.setStyle("-fx-background-color: white; -fx-border-width: 0 2 1 0; -fx-border-color: white black black white;")
@@ -58,7 +68,7 @@ class NoteView(stringNumber: Int, fretNumber: Int) {
     if (fretNumber == 0) return
 
     key.foreach { note =>
-      if (note == currentNote) {
+      if (note == note) {
         holder.setStyle("-fx-background-color: cyan;")
       }
     }
