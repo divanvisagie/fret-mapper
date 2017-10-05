@@ -7,7 +7,7 @@ class NoteMapperSpec extends FlatSpec with Matchers {
 
   def testNextNote(note: String, nextNote: String): Unit = {
     s"getNextNote $note" should s"return $nextNote" in {
-      noteMapper.getNextNote(note) should be (nextNote)
+      noteMapper.next(note) should be (nextNote)
     }
   }
   testNextNote("A","A#")

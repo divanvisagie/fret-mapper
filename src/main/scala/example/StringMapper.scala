@@ -8,9 +8,9 @@ class StringMapper {
 
     numbers.foldLeft(Array[String]()) { (acc, i) =>
       if (i == 0) {
-         Array(noteMapper.getNextNote(note))
+         Array(noteMapper.next(note))
       } else {
-        acc ++ Array(noteMapper.getNextNote(acc.last))
+        acc ++ Array(noteMapper.next(acc.last))
       }
     }
   }

@@ -90,6 +90,14 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="_root_">root</a></dd></dl></div>
     </li><li class="current-entities indented1">
+                        <a class="object" href="FocusNoteSelector$.html" title=""></a>
+                        <a class="class" href="FocusNoteSelector.html" title="Creates a view that selects a focus note
+"></a>
+                        <a href="FocusNoteSelector.html" title="Creates a view that selects a focus note
+">
+                          FocusNoteSelector
+                        </a>
+                      </li><li class="current-entities indented1">
                         <span class="separator"></span>
                         <a class="object" href="FretMapperApp$.html" title=""></a>
                         <a href="FretMapperApp$.html" title="">
@@ -108,12 +116,6 @@
                           NoteMapper
                         </a>
                       </li><li class="current-entities indented1">
-                        <a class="object" href="NoteSelector$.html" title=""></a>
-                        <a class="class" href="NoteSelector.html" title=""></a>
-                        <a href="NoteSelector.html" title="">
-                          NoteSelector
-                        </a>
-                      </li><li class="current-entities indented1">
                         <a class="object" href="NoteView$.html" title=""></a>
                         <a class="class" href="NoteView.html" title=""></a>
                         <a href="NoteView.html" title="">
@@ -127,8 +129,10 @@
                         </a>
                       </li><li class="current-entities indented1">
                         <a class="object" href="TuningSelector$.html" title=""></a>
-                        <a class="class" href="TuningSelector.html" title=""></a>
-                        <a href="TuningSelector.html" title="">
+                        <a class="class" href="TuningSelector.html" title="Represents a view that allows the user to select a guitar tuning
+"></a>
+                        <a href="TuningSelector.html" title="Represents a view that allows the user to select a guitar tuning
+">
                           TuningSelector
                         </a>
                       </li>
@@ -437,7 +441,9 @@
         <span class="name">keys</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
       </span>
       
-      
+      <p class="shortcomment cmt">A map where the key is the note and the value is a sequence of notes that are contained within
+that musical key
+</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
@@ -455,9 +461,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="example.NoteMapper#noteOrder" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="noteOrder:Array[String]"></a>
+      <a id="noteOrder:Seq[String]"></a>
       <span class="permalink">
-      <a href="../example/NoteMapper$.html#noteOrder:Array[String]" title="Permalink">
+      <a href="../example/NoteMapper$.html#noteOrder:Seq[String]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -466,10 +472,11 @@
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">noteOrder</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">noteOrder</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
       
-      
+      <p class="shortcomment cmt">Sequence representing the order of notes
+</p>
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">

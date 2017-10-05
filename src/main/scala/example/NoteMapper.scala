@@ -2,10 +2,9 @@ package example
 
 
 class NoteMapper {
-
   import NoteMapper._
 
-  def getNote(note: String, selector: (Int) => Int): String = {
+  private def getNote(note: String, selector: (Int) => Int): String = {
     val noteIndex = noteOrder.indexOf(note.toUpperCase)
     val nextIndex = if (noteIndex == noteOrder.length-1) {
       0
@@ -15,7 +14,10 @@ class NoteMapper {
     noteOrder(nextIndex)
   }
 
-  def getNextNote(note: String): String = {
+  /**
+    * get the note that comes after the specified note
+    * */
+  def next(note: String): String = {
     getNote(note, {x => x + 1})
   }
 
@@ -23,10 +25,18 @@ class NoteMapper {
 
 object NoteMapper {
   def apply(): NoteMapper = new NoteMapper()
-  val noteOrder = Array(
-    "A", "A#", "B", "C", "C#", "D", "D#", "E",  "F", "F#", "G",  "G#"
+
+  /**
+    * Sequence representing the order of notes
+    * */
+  val noteOrder = Seq(
+    "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G",  "G#"
   )
 
+  /**
+    * A map where the key is the note and the value is a sequence of notes that are contained within
+    * that musical key
+    * */
   val keys: Map[String, Seq[String]] = Map[String,Seq[String]](
     "A" -> Seq("A", "B", "C#", "D", "E", "F#", "G#"),
     "A#" -> Seq("A#" ,"C", "D", "D#", "F", "G", "A"),

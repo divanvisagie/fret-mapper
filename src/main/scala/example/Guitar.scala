@@ -1,6 +1,6 @@
 package example
 
-class Guitar(tuning: Array[String]) {
+class Guitar(tuning: Seq[String]) {
 
   private val stringMapper = StringMapper()
 
@@ -28,7 +28,7 @@ class Guitar(tuning: Array[String]) {
   }
 }
 object Guitar {
-  def apply(tuning: Array[String]): Guitar = new Guitar(tuning)
+  def apply(tuning: Seq[String]): Guitar = new Guitar(tuning)
 
   /**
     * Creates a new 6 string guitar with standard E tuning
@@ -45,10 +45,10 @@ object Guitar {
     * A map key value store where key is the Guitar tuning and the value is an
     * array containing the notes it is tuned to
     * */
-  val tuningsMap: Map[String,Array[String]] = Map[String,Array[String]](
-    "Standard E" -> Array("E","A","D","G","B","E"),
-    "Standard C" -> Array("C","F","A#","D#","G","C"),
-    "Drop C" -> Array("C","G","C","F","A","D"),
-    "Bass E" -> Array("E","A","D","G")
+  val tuningsMap: Map[String,Seq[String]] = Map[String,Seq[String]](
+    "Standard E" -> Seq("E","A","D","G","B","E"),
+    "Standard C" -> Seq("C","F","A#","D#","G","C"),
+    "Drop C" -> Seq("C","G","C","F","A","D"),
+    "Bass E" -> Seq("E","A","D","G")
   )
 }
