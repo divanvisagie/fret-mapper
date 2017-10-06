@@ -1,18 +1,19 @@
 package fretmapper.views
 
 
+import akka.actor.ActorRef
 import fretmapper.core.NoteMapper
 
 import scalafx.Includes.handle
 import scalafx.geometry.Insets
 import scalafx.scene.Node
-import scalafx.scene.control.{CheckBox, ComboBox, Label}
+import scalafx.scene.control.{ComboBox, Label}
 import scalafx.scene.layout.HBox
 
 /**
   * Creates a view that selects a focus note
   * */
-class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
+class FocusNoteSelector(applicationStore: ActorRef) {
   private val hbox = new HBox()
 
   private val label = new Label("Highlight Note:")
@@ -24,7 +25,6 @@ class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
 
   private def key: Seq[String] = NoteMapper.keys.getOrElse(note,Seq[String]())
 
-
   val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
   keyLabel.padding = labelPadding
@@ -35,9 +35,8 @@ class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
     comboBox += note
   }
   comboBox.onAction = handle {
-    noteViews.foreach { noteView =>
-      noteView.highlight(note)
-    }
+    println(note)
+    applicationStore ! note
     val keyText =
       NoteMapper.keys.getOrElse(note,Seq[String]()).mkString(", ")
 
@@ -48,9 +47,10 @@ class FocusNoteSelector(noteViews: IndexedSeq[Note]) {
   hbox.children.add(label)
   hbox.children.add(comboBox)
   hbox.children.add(keyLabel)
+
 }
 
 object FocusNoteSelector {
-  def apply(noteViews: IndexedSeq[Note]): FocusNoteSelector =
-    new FocusNoteSelector(noteViews)
+  def apply(applicationStore: ActorRef): FocusNoteSelector
+  = new FocusNoteSelector(applicationStore)
 }

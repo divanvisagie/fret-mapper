@@ -1,5 +1,6 @@
 package fretmapper.views
 
+import akka.actor.Actor.Receive
 import fretmapper.core.{Guitar, NoteMapper}
 
 import scalafx.scene.Node
@@ -14,7 +15,7 @@ import scalafx.scene.layout.BorderPane
   * The NoteView is self aware of it's place on the fretboard, therefore it's value is
   * changed by changing the value of it's guitar's tuning
   * */
-class Note(stringNumber: Int, fretNumber: Int) {
+class Note(stringNumber: Int, fretNumber: Int) extends StoreListener {
   private val label = new Label("")
   private var guitar: Guitar = Guitar.standardE
 
@@ -98,6 +99,13 @@ class Note(stringNumber: Int, fretNumber: Int) {
     } else {
       holder.visible = true
     }
+  }
+
+  override def onChange: Receive = {
+    case focusNote: String =>
+      highlightedNote = focusNote
+      style()
+    case _=> noop()
   }
 }
 object Note {
