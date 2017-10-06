@@ -1,7 +1,5 @@
 package fretmapper.views
 
-
-import akka.actor.ActorRef
 import fretmapper.core.NoteMapper
 
 import scalafx.Includes.handle
@@ -13,7 +11,7 @@ import scalafx.scene.layout.HBox
 /**
   * Creates a view that selects a focus note
   * */
-class FocusNoteSelector(applicationStore: ActorRef) {
+class FocusNoteSelector(applicationStore: Listener) {
   private val hbox = new HBox()
 
   private val label = new Label("Highlight Note:")
@@ -51,6 +49,6 @@ class FocusNoteSelector(applicationStore: ActorRef) {
 }
 
 object FocusNoteSelector {
-  def apply(applicationStore: ActorRef): FocusNoteSelector
+  def apply(applicationStore: Listener): FocusNoteSelector
   = new FocusNoteSelector(applicationStore)
 }

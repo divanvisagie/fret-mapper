@@ -8,13 +8,11 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.Label
 import scalafx.scene.layout.{BorderPane, GridPane}
-import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 
 object FretMapperApp extends JFXApp {
 
-  val system = ActorSystem("guitar-app-state")
 
-  private val applicationStore = system.actorOf(ApplicationStore.props())
+  private val applicationStore = ApplicationStore()
 
   private val guitar = Guitar.standardE
 

@@ -1,25 +1,15 @@
 package fretmapper.views
 
-import akka.actor.Actor.Receive
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import fretmapper.core.Guitar
-
-trait StoreListener {
-  def onChange: Receive
-
-  def !(message: Any): Unit = onChange(message)
-
-  def noop(): Unit = {}
-}
-
-class ApplicationStore extends Actor with ActorLogging {
-
-  var listeners: Array[StoreListener] = Array()
+import fretmapper.views.ApplicationStore.ReceiveMessage
 
 
+class ApplicationStore extends Listener {
 
-  override def receive: Receive = {
-    case l: StoreListener => listeners = listeners :+ l
+  var listeners: Array[Listener] = Array()
+
+  override def receive: ReceiveMessage = {
+    case l: Listener => listeners = listeners :+ l
     case g: Guitar => listeners.foreach { a =>
       a ! g
     }
@@ -34,5 +24,7 @@ class ApplicationStore extends Actor with ActorLogging {
 }
 
 object ApplicationStore {
-  def props(): Props = Props(new ApplicationStore)
+  type ReceiveMessage = PartialFunction[Any, Unit]
+
+  def apply(): ApplicationStore = new ApplicationStore()
 }
