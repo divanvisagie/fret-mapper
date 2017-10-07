@@ -6,6 +6,7 @@ import fretmapper.views.ApplicationStore.ReceiveMessage
 import scalafx.scene.Node
 import scalafx.scene.control._
 import scalafx.scene.layout.BorderPane
+import scalafx.Includes.handle
 
 
 /**
@@ -15,7 +16,7 @@ import scalafx.scene.layout.BorderPane
   * The NoteView is self aware of it's place on the fretboard, therefore it's value is
   * changed by changing the value of it's guitar's tuning
   * */
-class Note(stringNumber: Int, fretNumber: Int) extends Listener {
+class Note(applicationStore: ApplicationStore, stringNumber: Int, fretNumber: Int) extends Listener {
   private val label = new Label("")
   private var guitar: Guitar = Guitar.standardE
 
@@ -28,6 +29,10 @@ class Note(stringNumber: Int, fretNumber: Int) extends Listener {
   holder.setMinWidth(32)
   holder.center = label
 
+  container.onMouseClicked = handle {
+    val note = guitar.getFret(fretNumber).lift(stringNumber).getOrElse("")
+    applicationStore ! SelectedNote(note, stringNumber)
+  }
   /**
     * Note that this view currently represents
     * */
@@ -62,13 +67,12 @@ class Note(stringNumber: Int, fretNumber: Int) extends Listener {
     style()
   }
 
-
-
   private def fretStyle(str: String): String = {
     val fretStyleMap = Map[String,String](
       "Red" -> "-fx-background-color: red;",
       "White" -> "-fx-background-color: white;",
-      "Blue" -> "-fx-background-color: cyan;"
+      "Cyan" -> "-fx-background-color: cyan;",
+      "Green" -> "-fx-background-color: green;"
     )
 
 
@@ -88,12 +92,22 @@ class Note(stringNumber: Int, fretNumber: Int) extends Listener {
     }
     NoteMapper.keys.getOrElse(highlightedNote, Seq("")).foreach { x =>
       if (x == note) {
-        holder.setStyle(fretStyle("Blue"))
+        holder.setStyle(fretStyle("Cyan"))
       }
     }
     if (highlightedNote == note) {
         holder.setStyle(fretStyle("Red"))
     }
+
+    applicationStore.selectedNotes.foreach { selectedNote =>
+      if (selectedNote.string == stringNumber) {
+        if (selectedNote.note == note) {
+          holder.setStyle(fretStyle("Green"))
+        }
+      }
+    }
+
+
     if (note == "") {
       holder.visible = false
     } else {
@@ -105,10 +119,13 @@ class Note(stringNumber: Int, fretNumber: Int) extends Listener {
     case focusNote: String =>
       highlightedNote = focusNote
       style()
+    case selectedNotes: Array[SelectedNote] =>
+      println(s"note received ${selectedNotes.mkString(",")}")
+      style()
     case _=> noop()
   }
 }
 object Note {
-  def apply(stringNumber: Int, fretNumber: Int): Note =
-    new Note(stringNumber, fretNumber)
+  def apply(applicationStore: ApplicationStore,stringNumber: Int, fretNumber: Int): Note =
+    new Note(applicationStore,stringNumber, fretNumber)
 }
