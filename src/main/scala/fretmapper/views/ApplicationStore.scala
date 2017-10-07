@@ -5,6 +5,8 @@ import fretmapper.views.ApplicationStore.ReceiveMessage
 
 case class SelectedNote(note: String, string: Int)
 
+case object ClearSelectedNotes
+
 class ApplicationStore extends Listener {
 
   private var listeners: Array[Listener] = Array()
@@ -18,16 +20,16 @@ class ApplicationStore extends Listener {
     }
     case sn: SelectedNote => {
       selectedNotes = selectedNotes :+ sn
-      val toPrint = selectedNotes.mkString(",")
-      println(s"Selected note $toPrint")
       listeners.foreach( _ ! selectedNotes)
     }
     case note: String => {
-        println(s"Changing note to $note")
         listeners.foreach { a =>
           a ! note
         }
     }
+    case ClearSelectedNotes =>
+      selectedNotes = Array[SelectedNote]()
+      listeners.foreach( _ ! selectedNotes)
     case _ => println("Got a message but not sure what to do")
   }
 }

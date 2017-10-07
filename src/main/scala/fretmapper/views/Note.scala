@@ -107,7 +107,6 @@ class Note(applicationStore: ApplicationStore, stringNumber: Int, fretNumber: In
       }
     }
 
-
     if (note == "") {
       holder.visible = false
     } else {
@@ -119,8 +118,7 @@ class Note(applicationStore: ApplicationStore, stringNumber: Int, fretNumber: In
     case focusNote: String =>
       highlightedNote = focusNote
       style()
-    case selectedNotes: Array[SelectedNote] =>
-      println(s"note received ${selectedNotes.mkString(",")}")
+    case _: Array[SelectedNote] =>
       style()
     case _=> noop()
   }

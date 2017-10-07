@@ -1,13 +1,14 @@
 package fretmapper
 
 import fretmapper.core.Guitar
-import fretmapper.views.{ApplicationStore, FocusNoteSelector, Note, TuningSelector}
+import fretmapper.views._
 
 import scalafx.application.JFXApp
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
-import scalafx.scene.control.Label
+import scalafx.scene.control.{Button, Label}
 import scalafx.scene.layout.{BorderPane, GridPane}
+import scalafx.Includes.handle
 
 object FretMapperApp extends JFXApp {
 
@@ -18,11 +19,18 @@ object FretMapperApp extends JFXApp {
 
   private val container = new GridPane()
 
+
+
+
   private val noteViews = (0 to 12).flatMap { fret =>
     val holder = new BorderPane()
     holder.setMinWidth(32)
     val label = new Label(s"$fret")
     holder.center = label
+
+
+
+
     container.add(holder, fret, 0)
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
       val noteView = Note(applicationStore,indexedNote._2, fret)

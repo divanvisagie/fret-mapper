@@ -1,21 +1,27 @@
 package fretmapper.views
 
+import fretmapper.FretMapperApp.applicationStore
 import fretmapper.core.NoteMapper
 
 import scalafx.Includes.handle
 import scalafx.geometry.Insets
 import scalafx.scene.Node
-import scalafx.scene.control.{ComboBox, Label}
+import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
 
 /**
   * Creates a view that selects a focus note
   * */
-class FocusNoteSelector(applicationStore: Listener) {
+class FocusNoteSelector(applicationStore: ApplicationStore) {
   private val hbox = new HBox()
 
   private val label = new Label("Highlight Note:")
   private val keyLabel = new Label("")
+
+  val clearUserSelectedAButton = new Button("Clear Selection")
+  clearUserSelectedAButton.onAction = handle {
+    applicationStore ! ClearSelectedNotes
+  }
 
   def container: Node = hbox
 
@@ -45,10 +51,11 @@ class FocusNoteSelector(applicationStore: Listener) {
   hbox.children.add(label)
   hbox.children.add(comboBox)
   hbox.children.add(keyLabel)
+  hbox.children.add(clearUserSelectedAButton)
 
 }
 
 object FocusNoteSelector {
-  def apply(applicationStore: Listener): FocusNoteSelector
+  def apply(applicationStore: ApplicationStore): FocusNoteSelector
   = new FocusNoteSelector(applicationStore)
 }
