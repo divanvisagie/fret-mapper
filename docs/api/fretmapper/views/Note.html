@@ -108,6 +108,18 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="fretmapper">fretmapper</a></dd></dl></div>
     </li><li class="current-entities indented2">
+                        <a class="object" href="ApplicationStore$.html" title=""></a>
+                        <a class="class" href="ApplicationStore.html" title=""></a>
+                        <a href="ApplicationStore.html" title="">
+                          ApplicationStore
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="ClearSelectedNotes$.html" title=""></a>
+                        <a href="ClearSelectedNotes$.html" title="">
+                          ClearSelectedNotes
+                        </a>
+                      </li><li class="current-entities indented2">
                         <a class="object" href="FocusNoteSelector$.html" title=""></a>
                         <a class="class" href="FocusNoteSelector.html" title="Creates a view that selects a focus note
 "></a>
@@ -116,10 +128,22 @@
                           FocusNoteSelector
                         </a>
                       </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="trait" href="Listener.html" title=""></a>
+                        <a href="Listener.html" title="">
+                          Listener
+                        </a>
+                      </li><li class="current-entities indented2">
                         <a class="object" href="Note$.html" title=""></a>
                         <a class="class" href="" title="This class contains a view that is drawn at a certain point on the fretboard."></a>
                         <a href="" title="This class contains a view that is drawn at a certain point on the fretboard.">
                           Note
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="class" href="SelectedNote.html" title=""></a>
+                        <a href="SelectedNote.html" title="">
+                          SelectedNote
                         </a>
                       </li><li class="current-entities indented2">
                         <a class="object" href="TuningSelector$.html" title=""></a>
@@ -154,7 +178,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Note</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">Note</span><span class="result"> extends <a href="Listener.html" class="extype" name="fretmapper.views.Listener">Listener</a></span>
       </span>
       </h4>
 
@@ -166,7 +190,7 @@ changed by changing the value of it's guitar's tuning
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="Listener.html" class="extype" name="fretmapper.views.Listener">Listener</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -192,7 +216,7 @@ changed by changing the value of it's guitar's tuning
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="fretmapper.views.Note"><span>Note</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="fretmapper.views.Note"><span>Note</span></li><li class="in" name="fretmapper.views.Listener"><span>Listener</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -213,9 +237,9 @@ changed by changing the value of it's guitar's tuning
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="fretmapper.views.Note#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(stringNumber:Int,fretNumber:Int):fretmapper.views.Note"></a><a id="&lt;init&gt;:Note"></a>
+      <a id="&lt;init&gt;(applicationStore:fretmapper.views.ApplicationStore,stringNumber:Int,fretNumber:Int):fretmapper.views.Note"></a><a id="&lt;init&gt;:Note"></a>
       <span class="permalink">
-      <a href="../../fretmapper/views/Note.html#&lt;init&gt;(stringNumber:Int,fretNumber:Int):fretmapper.views.Note" title="Permalink">
+      <a href="../../fretmapper/views/Note.html#&lt;init&gt;(applicationStore:fretmapper.views.ApplicationStore,stringNumber:Int,fretNumber:Int):fretmapper.views.Note" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -224,7 +248,7 @@ changed by changing the value of it's guitar's tuning
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Note</span><span class="params">(<span name="stringNumber">stringNumber: <span class="extype" name="scala.Int">Int</span></span>, <span name="fretNumber">fretNumber: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="name">Note</span><span class="params">(<span name="applicationStore">applicationStore: <a href="ApplicationStore.html" class="extype" name="fretmapper.views.ApplicationStore">ApplicationStore</a></span>, <span name="stringNumber">stringNumber: <span class="extype" name="scala.Int">Int</span></span>, <span name="fretNumber">fretNumber: <span class="extype" name="scala.Int">Int</span></span>)</span>
       </span>
       
       
@@ -238,7 +262,23 @@ changed by changing the value of it's guitar's tuning
         <div class="values members">
               <h3>Value Members</h3>
               <ol>
-                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+                <li name="fretmapper.views.Listener#!" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!(message:Any):Unit"></a><a id="!(Any):Unit"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/views/Note.html#!(message:Any):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang" class="name">!</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Listener.html" class="extype" name="fretmapper.views.Listener">Listener</a></dd></dl></div>
+    </li><li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
       <a href="../../fretmapper/views/Note.html#!=(x$1:Any):Boolean" title="Permalink">
@@ -524,6 +564,22 @@ changed by changing the value of it's guitar's tuning
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="fretmapper.views.Listener#noop" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="noop():Unit"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/views/Note.html#noop():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">noop</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Listener.html" class="extype" name="fretmapper.views.Listener">Listener</a></dd></dl></div>
     </li><li name="fretmapper.views.Note#note" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="note:String"></a>
       <span class="permalink">
@@ -573,6 +629,22 @@ changed by changing the value of it's guitar's tuning
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="fretmapper.views.Note#receive" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="receive:fretmapper.views.ApplicationStore.ReceiveMessage"></a><a id="receive:ReceiveMessage"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/views/Note.html#receive:fretmapper.views.ApplicationStore.ReceiveMessage" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">receive</span><span class="result">: <a href="ApplicationStore$.html#ReceiveMessage=PartialFunction[Any,Unit]" class="extmbr" name="fretmapper.views.ApplicationStore.ReceiveMessage">ReceiveMessage</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="fretmapper.views.Note">Note</a> → <a href="Listener.html" class="extype" name="fretmapper.views.Listener">Listener</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
@@ -681,7 +753,9 @@ changed by changing the value of it's guitar's tuning
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="fretmapper.views.Listener">
+              <h3>Inherited from <a href="Listener.html" class="extype" name="fretmapper.views.Listener">Listener</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
