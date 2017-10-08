@@ -19,7 +19,9 @@ class ApplicationStore extends Listener {
     }
     case sn: SelectedNote =>
       if (selectedNotes.contains(sn)) {
-        selectedNotes = selectedNotes.filterNot(_ == sn)
+        selectedNotes = selectedNotes.filterNot { x =>
+          x.string == sn.string && x.note == sn.note
+        }
       } else {
         selectedNotes = selectedNotes :+ sn
       }

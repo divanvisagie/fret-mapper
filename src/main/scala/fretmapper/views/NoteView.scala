@@ -8,7 +8,6 @@ import scalafx.scene.control._
 import scalafx.scene.layout.BorderPane
 import scalafx.Includes.handle
 
-
 /**
   * This class contains a view that is drawn at a certain point on the fretboard.
   * It is designed so that it does not need to be destroyed when it's values change
@@ -31,7 +30,7 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
 
   container.onMouseClicked = handle {
     val note = guitar.getFret(fretNumber).lift(stringNumber).getOrElse("")
-    applicationStore ! SelectedNote(note, stringNumber)
+    applicationStore ! SelectedNote(note, stringNumber, fretNumber)
   }
   /**
     * Note that this view currently represents

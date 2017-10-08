@@ -2,7 +2,6 @@ package fretmapper.core
 
 class Guitar(tuning: Seq[String]) {
 
-  private val stringMapper = StringMapper()
 
   /**
     * Contains a Sequence representing guitar strings which contains another
@@ -10,7 +9,7 @@ class Guitar(tuning: Seq[String]) {
     * representing the note
     * */
   val strings: Seq[Seq[String]] = tuning.map { stringNote =>
-    stringMapper.getStringStartingWith(stringNote).toSeq
+    StringMapper.getStringStartingWith(stringNote).toSeq
   }
 
   /**
