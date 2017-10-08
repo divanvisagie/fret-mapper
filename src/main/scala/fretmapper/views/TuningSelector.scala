@@ -10,7 +10,7 @@ import scalafx.scene.layout.HBox
 /**
   * Represents a view that allows the user to select a guitar tuning
   * */
-class TuningSelector(noteViews: IndexedSeq[Note]) {
+class TuningSelector(noteViews: IndexedSeq[NoteView]) {
 
   val box = new HBox()
   val label = new Label("Guitar Tuning:")
@@ -33,6 +33,6 @@ class TuningSelector(noteViews: IndexedSeq[Note]) {
 }
 
 object TuningSelector {
-  def apply(noteViews: IndexedSeq[Note]): TuningSelector =
+  def apply(noteViews: IndexedSeq[NoteView]): TuningSelector =
     new TuningSelector(noteViews)
 }

@@ -1,6 +1,6 @@
 package fretmapper
 
-import fretmapper.core.Guitar
+import fretmapper.core.{ApplicationStore, Guitar}
 import fretmapper.views._
 
 import scalafx.application.JFXApp
@@ -27,13 +27,9 @@ object FretMapperApp extends JFXApp {
     holder.setMinWidth(32)
     val label = new Label(s"$fret")
     holder.center = label
-
-
-
-
     container.add(holder, fret, 0)
     guitar.getFret(fret).zipWithIndex.map { indexedNote =>
-      val noteView = Note(applicationStore,indexedNote._2, fret)
+      val noteView = NoteView(applicationStore,indexedNote._2, fret)
       noteView.changeTuning(guitar)
       container.add(noteView.container, fret, noteView.columnPosition+1)
       applicationStore ! noteView

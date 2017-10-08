@@ -1,6 +1,6 @@
-package fretmapper.views
+package fretmapper.core
 
-import fretmapper.views.ApplicationStore.ReceiveMessage
+import fretmapper.core.ApplicationStore.ReceiveMessage
 
 trait Listener {
   def receive: ReceiveMessage

@@ -1,7 +1,7 @@
 package fretmapper.views
 
-import fretmapper.core.{Guitar, NoteMapper}
-import fretmapper.views.ApplicationStore.ReceiveMessage
+import fretmapper.core._
+import fretmapper.core.ApplicationStore.ReceiveMessage
 
 import scalafx.scene.Node
 import scalafx.scene.control._
@@ -16,7 +16,7 @@ import scalafx.Includes.handle
   * The NoteView is self aware of it's place on the fretboard, therefore it's value is
   * changed by changing the value of it's guitar's tuning
   * */
-class Note(applicationStore: ApplicationStore, stringNumber: Int, fretNumber: Int) extends Listener {
+class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber: Int) extends Listener {
   private val label = new Label("")
   private var guitar: Guitar = Guitar.standardE
 
@@ -123,7 +123,7 @@ class Note(applicationStore: ApplicationStore, stringNumber: Int, fretNumber: In
     case _=> noop()
   }
 }
-object Note {
-  def apply(applicationStore: ApplicationStore,stringNumber: Int, fretNumber: Int): Note =
-    new Note(applicationStore,stringNumber, fretNumber)
+object NoteView {
+  def apply(applicationStore: ApplicationStore,stringNumber: Int, fretNumber: Int): NoteView =
+    new NoteView(applicationStore,stringNumber, fretNumber)
 }

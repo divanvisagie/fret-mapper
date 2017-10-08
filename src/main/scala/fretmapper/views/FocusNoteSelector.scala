@@ -1,7 +1,7 @@
 package fretmapper.views
 
 import fretmapper.FretMapperApp.applicationStore
-import fretmapper.core.NoteMapper
+import fretmapper.core.{ApplicationStore, ClearSelectedNotes, NoteMapper}
 
 import scalafx.Includes.handle
 import scalafx.geometry.Insets
