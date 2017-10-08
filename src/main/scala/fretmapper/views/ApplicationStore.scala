@@ -19,8 +19,12 @@ class ApplicationStore extends Listener {
       a ! g
     }
     case sn: SelectedNote => {
-      selectedNotes = selectedNotes :+ sn
-      listeners.foreach( _ ! selectedNotes)
+      if (selectedNotes.contains(sn)) {
+        selectedNotes = selectedNotes.filterNot(_ == sn)
+      } else {
+        selectedNotes = selectedNotes :+ sn
+      }
+      listeners.foreach(_ ! selectedNotes)
     }
     case note: String => {
         listeners.foreach { a =>
