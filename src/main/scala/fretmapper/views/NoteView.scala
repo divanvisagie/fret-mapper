@@ -82,6 +82,11 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
     }
   }
 
+  private def key(note: String): Seq[String] = {
+    NoteMapper.flattenKeyIfNeeded(
+      NoteMapper.musicalKeys.getOrElse(note, Seq())
+    )
+  }
 
   private def style(): Unit = {
     if (fretNumber == 0) {
@@ -89,12 +94,16 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
     } else {
       holder.setStyle(fretStyle("White"))
     }
-    NoteMapper.musicalKeys.getOrElse(highlightedNote, Seq("")).foreach { x =>
+    if (key(highlightedNote).mkString("").contains(NoteMapper.FLATCHARACTER)) {
+      label.setText(NoteMapper.flattenSharpNote(note))
+    }
+    key(highlightedNote).foreach { x =>
       if (x == note || x == NoteMapper.flattenSharpNote(note)) {
         holder.setStyle(fretStyle("Cyan"))
       }
     }
-    if (highlightedNote == note || highlightedNote == NoteMapper.flattenSharpNote(note)) {
+    if (highlightedNote == note ||
+      NoteMapper.flattenSharpNote(note) == NoteMapper.flattenSharpNote(highlightedNote)) {
         holder.setStyle(fretStyle("Red"))
     }
 
@@ -116,7 +125,7 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
   override def receive: ReceiveMessage = {
     case focusNote: String =>
       highlightedNote = focusNote
-      style()
+      changeTuning(guitar)
     case _: Array[SelectedNote] =>
       style()
     case _=> noop()

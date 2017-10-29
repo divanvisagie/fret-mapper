@@ -37,7 +37,7 @@ object FretMapperApp extends JFXApp {
   private val containerBox = new BorderPane {
     center = container
     top = TuningSelector(noteViews).box
-    bottom = FocusNoteSelector(applicationStore).container
+    bottom = ScaleSelector(applicationStore).container
   }
   containerBox.padding = Insets(10, 10, 10, 10)
   applicationStore ! guitar

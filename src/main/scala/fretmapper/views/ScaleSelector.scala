@@ -10,12 +10,12 @@ import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
 
 /**
-  * Creates a view that selects a focus note
+  * Creates a view that selects a focus scale
   * */
-class FocusNoteSelector(applicationStore: ApplicationStore) {
+class ScaleSelector(applicationStore: ApplicationStore) {
   private val hbox = new HBox()
 
-  private val label = new Label("Highlight Note:")
+  private val label = new Label("Highlight Scale:")
   private val keyLabel = new Label("")
 
   val clearUserSelectedAButton = new Button("Clear Selection")
@@ -25,9 +25,9 @@ class FocusNoteSelector(applicationStore: ApplicationStore) {
 
   def container: Node = hbox
 
-  def note: String = comboBox.getSelectionModel.getSelectedItem
+  def scale: String = comboBox.getSelectionModel.getSelectedItem
 
-  private def key: Seq[String] = NoteMapper.musicalKeys.getOrElse(note,Seq[String]())
+//  private def key: Seq[String] = NoteMapper.musicalKeys.getOrElse(scale,Seq[String]())
 
   val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
@@ -39,12 +39,15 @@ class FocusNoteSelector(applicationStore: ApplicationStore) {
     comboBox += note
   }
   comboBox.onAction = handle {
-    println(note)
-    applicationStore ! note
+//    val noteToUse = NoteMapper.musicalKeys(note).head
+//    println(noteToUse)
+    applicationStore ! scale
     val keyText =
-      NoteMapper.musicalKeys.getOrElse(note,Seq[String]()).mkString(", ")
+      NoteMapper.flattenKeyIfNeeded(
+        NoteMapper.musicalKeys.getOrElse(scale,Seq[String]()))
+        .mkString(", ")
 
-    keyLabel.setText(s"Key: $keyText")
+    keyLabel.setText(s" $keyText")
   }
   comboBox.getSelectionModel.select(0)
 
@@ -55,7 +58,7 @@ class FocusNoteSelector(applicationStore: ApplicationStore) {
 
 }
 
-object FocusNoteSelector {
-  def apply(applicationStore: ApplicationStore): FocusNoteSelector
-  = new FocusNoteSelector(applicationStore)
+object ScaleSelector {
+  def apply(applicationStore: ApplicationStore): ScaleSelector
+  = new ScaleSelector(applicationStore)
 }

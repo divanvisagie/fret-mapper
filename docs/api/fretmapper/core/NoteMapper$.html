@@ -132,6 +132,16 @@
                           Listener
                         </a>
                       </li><li class="current-entities indented2">
+                        <a class="object" href="LoopAccessor$.html" title=""></a>
+                        <a class="class" href="LoopAccessor.html" title="Wraps a Sequence to access at an infinite index level, if the index you requested
+is passed the size of the sequence, it loops back to the beginning
+"></a>
+                        <a href="LoopAccessor.html" title="Wraps a Sequence to access at an infinite index level, if the index you requested
+is passed the size of the sequence, it loops back to the beginning
+">
+                          LoopAccessor
+                        </a>
+                      </li><li class="current-entities indented2">
                         <span class="separator"></span>
                         <a class="object" href="" title="Utilities for mapping notes
 "></a>
@@ -289,6 +299,22 @@ These notes are highlighted on the UI
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="fretmapper.core.NoteMapper#FLATCHARACTER" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FLATCHARACTER:String"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/core/NoteMapper$.html#FLATCHARACTER:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FLATCHARACTER</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
@@ -381,6 +407,40 @@ These notes are highlighted on the UI
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="fretmapper.core.NoteMapper#flattenKeyIfNeeded" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="flattenKeyIfNeeded(items:Seq[String]):Seq[String]"></a><a id="flattenKeyIfNeeded(Seq[String]):Seq[String]"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/core/NoteMapper$.html#flattenKeyIfNeeded(items:Seq[String]):Seq[String]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">flattenKeyIfNeeded</span><span class="params">(<span name="items">items: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      
+      
+    </li><li name="fretmapper.core.NoteMapper#flattenSharpNote" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="flattenSharpNote(note:String):String"></a><a id="flattenSharpNote(String):String"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/core/NoteMapper$.html#flattenSharpNote(note:String):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">flattenSharpNote</span><span class="params">(<span name="note">note: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Turns a sharp note into it's flat equivalent, or does nothing when
+a note is not sharp
+</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
@@ -429,10 +489,26 @@ These notes are highlighted on the UI
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="fretmapper.core.NoteMapper#keys" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="keys:Map[String,Seq[String]]"></a>
+    </li><li name="fretmapper.core.NoteMapper#keyFromJumpSequence" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="keyFromJumpSequence(root:String,noteJumps:Seq[Int]):Seq[String]"></a><a id="keyFromJumpSequence(String,Seq[Int]):Seq[String]"></a>
       <span class="permalink">
-      <a href="../../fretmapper/core/NoteMapper$.html#keys:Map[String,Seq[String]]" title="Permalink">
+      <a href="../../fretmapper/core/NoteMapper$.html#keyFromJumpSequence(root:String,noteJumps:Seq[Int]):Seq[String]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">keyFromJumpSequence</span><span class="params">(<span name="root">root: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="noteJumps">noteJumps: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      
+      
+    </li><li name="fretmapper.core.NoteMapper#musicalKeys" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="musicalKeys:scala.collection.immutable.ListMap[String,Seq[String]]"></a><a id="musicalKeys:ListMap[String,Seq[String]]"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/core/NoteMapper$.html#musicalKeys:scala.collection.immutable.ListMap[String,Seq[String]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -441,7 +517,7 @@ These notes are highlighted on the UI
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">keys</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+        <span class="name">musicalKeys</span><span class="result">: <span class="extype" name="scala.collection.immutable.ListMap">ListMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">A map where the key is the note and the value is a sequence of notes that are contained within
@@ -529,6 +605,23 @@ that musical key
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="fretmapper.core.NoteMapper#previous" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="previous(note:String):String"></a><a id="previous(String):String"></a>
+      <span class="permalink">
+      <a href="../../fretmapper/core/NoteMapper$.html#previous(note:String):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">previous</span><span class="params">(<span name="note">note: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">ge the note that comes before the specified note
+</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">

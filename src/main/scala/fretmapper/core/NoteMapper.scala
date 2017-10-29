@@ -15,6 +15,10 @@ object NoteMapper {
   )
   val FLATCHARACTER = "♭"
 
+  /**
+    * Turns a sharp note into it's flat equivalent, or does nothing when
+    * a note is not sharp
+    * */
   def flattenSharpNote(note: String): String = {
 
 
@@ -36,9 +40,19 @@ object NoteMapper {
       (notes.last +: notes).reverse.tail.reverse
   }
 
+  def flattenKeyIfNeeded(items: Seq[String]): Seq[String] = {
+    if (items.length < 1) return items
+    if (items.map(_.head).toSet.size != items.size) {
+      items.map(flattenSharpNote)
+    } else {
+      items
+    }
+  }
+
   private val majorScale = Seq(2,2,1,2,2,2,1)
   private val naturalMinorScale = Seq(2,1,2,2,1,2,2)
   private val minorHarmonicScale = Seq(2,1,2,2,1,3,1)
+  private val diminished = Seq(2,1,2,1,2,1,2,1)
   private val persianScale = Seq(1,3,1,1,2,3,1)
 
 
@@ -49,16 +63,17 @@ object NoteMapper {
   val musicalKeys: ListMap[String, Seq[String]] = ListMap[String,Seq[String]](
     "A major" -> keyFromJumpSequence("A",majorScale),
     "A natural minor" -> keyFromJumpSequence("A",naturalMinorScale),
-    "B flat major" -> keyFromJumpSequence("A#",majorScale).map(flattenSharpNote),
+    "B flat major" -> keyFromJumpSequence("A#",majorScale),
     "B major" -> keyFromJumpSequence("B",majorScale),
     "C major" -> keyFromJumpSequence("C",majorScale),
-    "C persian" -> keyFromJumpSequence("C",persianScale).map(flattenSharpNote),
+    "C diminished" -> keyFromJumpSequence("C",diminished),
+    "C persian" -> keyFromJumpSequence("C",persianScale),
     "C natural minor" -> keyFromJumpSequence("C", naturalMinorScale),
     "C natural minor" -> keyFromJumpSequence("C",naturalMinorScale),
     "E natural minor" -> keyFromJumpSequence("E",naturalMinorScale),
     "F major" -> keyFromJumpSequence("F", majorScale),
     "F natural minor" -> keyFromJumpSequence("F", naturalMinorScale),
-    "F minor harmonic" -> keyFromJumpSequence("F", minorHarmonicScale).map(flattenSharpNote),
+    "F minor harmonic" -> keyFromJumpSequence("F", minorHarmonicScale),
     "G major" -> keyFromJumpSequence("G", majorScale),
   )
 
