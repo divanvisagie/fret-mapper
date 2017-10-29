@@ -27,7 +27,7 @@ class FocusNoteSelector(applicationStore: ApplicationStore) {
 
   def note: String = comboBox.getSelectionModel.getSelectedItem
 
-  private def key: Seq[String] = NoteMapper.keys.getOrElse(note,Seq[String]())
+  private def key: Seq[String] = NoteMapper.musicalKeys.getOrElse(note,Seq[String]())
 
   val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
@@ -35,14 +35,14 @@ class FocusNoteSelector(applicationStore: ApplicationStore) {
 
   private val comboBox = new ComboBox[String]()
   comboBox += "None"
-  NoteMapper.noteOrder.foreach { note =>
+  NoteMapper.musicalKeys.keySet.foreach { note =>
     comboBox += note
   }
   comboBox.onAction = handle {
     println(note)
     applicationStore ! note
     val keyText =
-      NoteMapper.keys.getOrElse(note,Seq[String]()).mkString(", ")
+      NoteMapper.musicalKeys.getOrElse(note,Seq[String]()).mkString(", ")
 
     keyLabel.setText(s"Key: $keyText")
   }

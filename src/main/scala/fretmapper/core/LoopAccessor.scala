@@ -1,20 +1,26 @@
 package fretmapper.core
 
 /**
-  * Wraps an array to access at an infinite index level, if the index you requested
-  * is passed the size of the array, it loops back to the beginning
+  * Wraps a Sequence to access at an infinite index level, if the index you requested
+  * is passed the size of the sequence, it loops back to the beginning
   * */
-class LoopAccessor[T](array: Array[T]) {
+class LoopAccessor[T](seq: Seq[T]) {
   def getAtIndex(index: Int): T = {
 
-    if (index >= array.length) {
-      val remainder = index % array.length
-      return array(remainder)
+    if (index < 0) {
+      val indexToUse = seq.length + index
+      return seq(indexToUse)
     }
-  array(index)
+
+    if (index >= seq.length) {
+      val remainder = index % seq.length
+      return seq(remainder)
+    }
+    seq(index)
   }
 }
 
 object LoopAccessor {
-  def apply[T](array: Array[T]): LoopAccessor[T] = new LoopAccessor(array)
+  def apply[T](seq: Seq[T]): LoopAccessor[T] = new LoopAccessor(seq)
 }
+

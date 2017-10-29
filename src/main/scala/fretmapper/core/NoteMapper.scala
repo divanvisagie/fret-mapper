@@ -12,33 +12,61 @@ object NoteMapper {
     "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G",  "G#"
   )
 
+
+  def flattenSharpNote(note: String): String = {
+    val flatCharacter = "♭"
+
+    if (!note.contains("#")) {
+       note
+    } else {
+      next(note) + flatCharacter
+    }
+  }
+
+  def keyFromJumpSequence(root: String ,noteJumps: Seq[Int]): Seq[String] = {
+      val rootIndex = noteOrder.indexOf(root)
+      var currentIndex = rootIndex
+      val noteOrderLoop = LoopAccessor[String](noteOrder)
+      val notes = noteJumps.map { noteIndex =>
+        currentIndex += noteIndex
+        noteOrderLoop.getAtIndex(currentIndex)
+      }
+      (notes.last +: notes).reverse.tail.reverse
+  }
+
+  private val majorScale = Seq(2,2,1,2,2,2,1)
+  private val naturalMinorScale = Seq(2,1,2,2,1,2,2)
+  private val minorHarmonicScale = Seq(2,1,2,2,1,3,1)
+
+
   /**
     * A map where the key is the note and the value is a sequence of notes that are contained within
     * that musical key
     * */
-  val keys: Map[String, Seq[String]] = Map[String,Seq[String]](
-    "A" -> Seq("A", "B", "C#", "D", "E", "F#", "G#"),
-    "A#" -> Seq("A#" ,"C", "D", "D#", "F", "G", "A"),
-    "B" -> Seq("B", "C#", "D#", "E", "F#", "G#", "A#"),
-    "C" -> Seq("C", "D", "E", "F", "G", "A", "B", "C"),
-    "C#" -> Seq("C#", "D#", "E#", "F#", "G#", "A#", "B#", "C#"),
-    "D" -> Seq("D", "E", "F#", "G", "A", "B", "C#"),
-    "D#" -> Seq("D#", "F" ,"G", "G#" ,"A#" ,"C", "D"),
-    "E" -> Seq("E", "F#", "G#", "A", "B", "C#", "D#"),
-    "F" -> Seq("F","G", "A", "A#", "C", "D", "E"),
-    "F#" -> Seq("F#", "G#", "A#", "B", "C#", "D#", "E#"),
-    "G" -> Seq("G", "A", "B", "C" ,"D" ,"E", "F#"),
-    "G#" -> Seq("G#", "A#", "C" ,"C#", "D#", "F", "G")
+  val musicalKeys: Map[String, Seq[String]] = Map[String,Seq[String]](
+    "A major" -> keyFromJumpSequence("A",majorScale),
+    "A natural minor" -> keyFromJumpSequence("A",naturalMinorScale),
+    "B flat major" -> keyFromJumpSequence("A#",majorScale).map(flattenSharpNote),
+    "B major" -> keyFromJumpSequence("B",majorScale),
+    "C major" -> keyFromJumpSequence("C",majorScale),
+    "C natural minor" -> keyFromJumpSequence("C", naturalMinorScale),
+    "C natural minor" -> keyFromJumpSequence("C",naturalMinorScale),
+    "E natural minor" -> keyFromJumpSequence("E",naturalMinorScale),
+    "F major" -> keyFromJumpSequence("F", majorScale),
+    "F minor" -> keyFromJumpSequence("F", naturalMinorScale),
+    "F minor harmonic" -> keyFromJumpSequence("F", minorHarmonicScale).map(flattenSharpNote),
+    "G major" -> keyFromJumpSequence("G", majorScale),
   )
 
   private def getNote(note: String, selector: (Int) => Int): String = {
     val noteIndex = noteOrder.indexOf(note.toUpperCase)
+    val noteOrderLoop = LoopAccessor[String](noteOrder)
     val nextIndex = if (noteIndex == noteOrder.length-1) {
       0
     } else {
       selector(noteIndex)
     }
-    noteOrder(nextIndex)
+    noteOrderLoop.getAtIndex(nextIndex)
   }
 
   /**
@@ -46,6 +74,13 @@ object NoteMapper {
     * */
   def next(note: String): String = {
     getNote(note, {x => x + 1})
+  }
+
+  /**
+    * ge the note that comes before the specified note
+    * */
+  def previous(note: String): String = {
+    getNote(note, {x => x - 1})
   }
 }
 

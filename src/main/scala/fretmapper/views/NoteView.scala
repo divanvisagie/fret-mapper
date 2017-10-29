@@ -89,12 +89,12 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
     } else {
       holder.setStyle(fretStyle("White"))
     }
-    NoteMapper.keys.getOrElse(highlightedNote, Seq("")).foreach { x =>
-      if (x == note) {
+    NoteMapper.musicalKeys.getOrElse(highlightedNote, Seq("")).foreach { x =>
+      if (x == note || x == NoteMapper.flattenSharpNote(note)) {
         holder.setStyle(fretStyle("Cyan"))
       }
     }
-    if (highlightedNote == note) {
+    if (highlightedNote == note || highlightedNote == NoteMapper.flattenSharpNote(note)) {
         holder.setStyle(fretStyle("Red"))
     }
 
