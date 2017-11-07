@@ -26,7 +26,13 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
 
   def container: Node = holder
 
-  holder.setMinWidth(32)
+  if (fretNumber < 12) {
+
+    holder.setMinWidth(32)
+  } else {
+
+    holder.setMinWidth(44 - fretNumber)
+  }
   holder.center = label
 
   container.onMouseClicked = handle {
@@ -103,9 +109,11 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
         holder.setStyle(fretStyle("Cyan"))
       }
     }
-    if (highlightedNote == note ||
-      Note.flattenSharpNote(note) == Note.flattenSharpNote(highlightedNote)) {
+
+    if (scale.noteSequence.nonEmpty) {
+      if (scale.noteSequence.head == note) {
         holder.setStyle(fretStyle("Red"))
+      }
     }
 
     applicationStore.selectedNotes.foreach { selectedNote =>
