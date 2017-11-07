@@ -6,7 +6,7 @@ import scala.collection.immutable.ListMap
 /**
   * Utilities for mapping notes
   * */
-object NoteMapper {
+object Note {
   /**
     * Sequence representing the order of notes
     * */
@@ -70,6 +70,7 @@ object NoteMapper {
     "C persian" -> keyFromJumpSequence("C",persianScale),
     "C natural minor" -> keyFromJumpSequence("C", naturalMinorScale),
     "C natural minor" -> keyFromJumpSequence("C",naturalMinorScale),
+    "D natural minor" -> keyFromJumpSequence("D",naturalMinorScale),
     "E natural minor" -> keyFromJumpSequence("E",naturalMinorScale),
     "F major" -> keyFromJumpSequence("F", majorScale),
     "F natural minor" -> keyFromJumpSequence("F", naturalMinorScale),

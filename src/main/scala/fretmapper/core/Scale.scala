@@ -5,11 +5,20 @@ import scala.collection.immutable.ListMap
 /**
   * Represent a scale sequence and it's root note
   * */
-case class Scale(note: String, scaleSequence: Seq[Int])
+class Scale(note: String, scaleSequence: Seq[Int]) {
+  def noteSequence: Seq[String] =
+    if (note == "None" || scaleSequence.isEmpty){
+      Seq[String]() }
+    else {
+      Note.keyFromJumpSequence(note,scaleSequence)
+    }
+}
 
 
+object Scale {
 
-object ScaleMapper {
+  def apply(note: String, scaleSequence: Seq[Int]): Scale = new Scale(note, scaleSequence)
+
   private val majorScale = Seq(2,2,1,2,2,2,1)
   private val naturalMinorScale = Seq(2,1,2,2,1,2,2)
   private val minorHarmonicScale = Seq(2,1,2,2,1,3,1)

@@ -12,6 +12,7 @@ class ApplicationStore extends Listener {
 
   var selectedNotes: Array[SelectedNote] = Array[SelectedNote]()
 
+
   override def receive: ReceiveMessage = {
     case l: Listener => listeners = listeners :+ l
     case g: Guitar => listeners.foreach { a =>
@@ -29,6 +30,14 @@ class ApplicationStore extends Listener {
     case note: String =>
       listeners.foreach { a =>
         a ! note
+      }
+    case s: Scale =>
+      listeners.foreach { a =>
+        s.noteSequence.foreach { note =>
+          println(note)
+          a ! note
+        }
+        a ! s
       }
     case ClearSelectedNotes =>
       selectedNotes = Array[SelectedNote]()

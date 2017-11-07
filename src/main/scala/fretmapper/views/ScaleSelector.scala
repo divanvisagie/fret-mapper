@@ -1,7 +1,6 @@
 package fretmapper.views
 
-import fretmapper.FretMapperApp.applicationStore
-import fretmapper.core.{ApplicationStore, ClearSelectedNotes, NoteMapper, ScaleMapper}
+import fretmapper.core.{ApplicationStore, ClearSelectedNotes, Note, Scale}
 
 import scalafx.Includes.handle
 import scalafx.geometry.Insets
@@ -14,7 +13,6 @@ import scalafx.scene.layout.HBox
   * */
 class ScaleSelector(applicationStore: ApplicationStore) {
   private val hbox = new HBox()
-
   private val label = new Label("Highlight Scale:")
   private val keyLabel = new Label("")
 
@@ -26,29 +24,36 @@ class ScaleSelector(applicationStore: ApplicationStore) {
   def container: Node = hbox
 
   def scaleSequenceKey: String = scaleSequenceComboBox.getSelectionModel.getSelectedItem
+  def note: String = noteComboBox.getSelectionModel.getSelectedItem
 
-
-  val labelPadding = Insets(2,10,5,5)
+  private val boxPadding = Insets(0,0,0,10)
+  private val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
   keyLabel.padding = labelPadding
+
 
   private val scaleSequenceComboBox = new ComboBox[String]()
   private val noteComboBox = new ComboBox[String]()
 
-  NoteMapper.noteOrder.foreach { note =>
+  noteComboBox += "None"
+  Note.noteOrder.foreach { note =>
     noteComboBox += note
   }
+  noteComboBox.getSelectionModel.select(0)
 
+  scaleSequenceComboBox.margin = boxPadding
   scaleSequenceComboBox += "None"
-  ScaleMapper.scales.keySet.foreach { note =>
+  Scale.scales.keySet.foreach { note =>
     scaleSequenceComboBox += note
   }
   scaleSequenceComboBox.onAction = handle {
-    applicationStore ! scaleSequenceKey
-    val keyText =
-      NoteMapper.flattenKeyIfNeeded(
-        NoteMapper.musicalKeys.getOrElse(scaleSequenceKey,Seq[String]()))
-        .mkString(", ")
+    val scaleSequence = Scale.scales.getOrElse(scaleSequenceKey,Seq[Int]())
+    val scale = Scale(note,scaleSequence)
+
+    applicationStore ! scale
+
+    val keyText = Note.keyFromJumpSequence(note, scaleSequence)
+            .mkString(", ")
 
     keyLabel.setText(s" $keyText")
   }

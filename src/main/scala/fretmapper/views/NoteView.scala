@@ -22,6 +22,7 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
   private var highlightedNote = ""
 
   private val holder = new BorderPane()
+  var scale: Scale = Scale("None",Seq[Int]())
 
   def container: Node = holder
 
@@ -82,11 +83,11 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
     }
   }
 
-  private def key(note: String): Seq[String] = {
-    NoteMapper.flattenKeyIfNeeded(
-      NoteMapper.musicalKeys.getOrElse(note, Seq())
-    )
-  }
+//  private def scale(note: String): Seq[String] = {
+//    Note.flattenKeyIfNeeded(
+//      Note.musicalKeys.getOrElse(note, Seq())
+//    )
+//  }
 
   private def style(): Unit = {
     if (fretNumber == 0) {
@@ -94,16 +95,16 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
     } else {
       holder.setStyle(fretStyle("White"))
     }
-    if (key(highlightedNote).mkString("").contains(NoteMapper.FLATCHARACTER)) {
-      label.setText(NoteMapper.flattenSharpNote(note))
-    }
-    key(highlightedNote).foreach { x =>
-      if (x == note || x == NoteMapper.flattenSharpNote(note)) {
+//    if (scale(highlightedNote).mkString("").contains(Note.FLATCHARACTER)) {
+//      label.setText(Note.flattenSharpNote(note))
+//    }
+    scale.noteSequence.foreach { x =>
+      if (x == note || x == Note.flattenSharpNote(note)) {
         holder.setStyle(fretStyle("Cyan"))
       }
     }
     if (highlightedNote == note ||
-      NoteMapper.flattenSharpNote(note) == NoteMapper.flattenSharpNote(highlightedNote)) {
+      Note.flattenSharpNote(note) == Note.flattenSharpNote(highlightedNote)) {
         holder.setStyle(fretStyle("Red"))
     }
 
@@ -126,6 +127,9 @@ class NoteView(applicationStore: ApplicationStore, stringNumber: Int, fretNumber
     case focusNote: String =>
       highlightedNote = focusNote
       changeTuning(guitar)
+    case s: Scale =>
+      scale = s
+      style()
     case _: Array[SelectedNote] =>
       style()
     case _=> noop()
