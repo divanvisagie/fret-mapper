@@ -24,10 +24,14 @@ object Scale {
   private val minorHarmonicScale = Seq(2,1,2,2,1,3,1)
   private val diminished = Seq(2,1,2,1,2,1,2,1)
   private val persianScale = Seq(1,3,1,1,2,3,1)
+  private val majorPentatonic = Seq(2,2,3,2,3)
+  private val minorPentatonic = Seq(3,2,2,3,2)
 
   val scales: ListMap[String, Seq[Int]] = ListMap[String, Seq[Int]](
     "Major" -> majorScale,
     "Natural minor" -> naturalMinorScale,
+    "Minor pentatonic" -> minorPentatonic,
+    "Major pentatonic" -> majorPentatonic,
     "Minor harmonic scale" -> minorHarmonicScale,
     "Diminished" -> diminished,
     "Persian" -> persianScale

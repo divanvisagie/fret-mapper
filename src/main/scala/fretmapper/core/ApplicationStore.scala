@@ -34,7 +34,6 @@ class ApplicationStore extends Listener {
     case s: Scale =>
       listeners.foreach { a =>
         s.noteSequence.foreach { note =>
-          println(note)
           a ! note
         }
         a ! s
