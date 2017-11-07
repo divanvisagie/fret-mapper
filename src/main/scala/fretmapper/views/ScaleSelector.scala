@@ -1,5 +1,7 @@
 package fretmapper.views
 
+import javafx.event.EventHandler
+
 import fretmapper.core.{ApplicationStore, ClearSelectedNotes, Note, Scale}
 
 import scalafx.Includes.handle
@@ -35,9 +37,25 @@ class ScaleSelector(applicationStore: ApplicationStore) {
   private val scaleSequenceComboBox = new ComboBox[String]()
   private val noteComboBox = new ComboBox[String]()
 
+
+  def handleAction(): Unit = {
+    val scaleSequence = Scale.scales.getOrElse(scaleSequenceKey,Seq[Int]())
+    val scale = Scale(note,scaleSequence)
+
+    applicationStore ! scale
+
+    val keyText = Note.keyFromJumpSequence(note, scaleSequence)
+      .mkString(", ")
+
+    keyLabel.setText(s" $keyText")
+  }
+
   noteComboBox += "None"
   Note.noteOrder.foreach { note =>
     noteComboBox += note
+  }
+  noteComboBox.onAction = handle {
+    handleAction()
   }
   noteComboBox.getSelectionModel.select(0)
 
@@ -47,15 +65,7 @@ class ScaleSelector(applicationStore: ApplicationStore) {
     scaleSequenceComboBox += note
   }
   scaleSequenceComboBox.onAction = handle {
-    val scaleSequence = Scale.scales.getOrElse(scaleSequenceKey,Seq[Int]())
-    val scale = Scale(note,scaleSequence)
-
-    applicationStore ! scale
-
-    val keyText = Note.keyFromJumpSequence(note, scaleSequence)
-            .mkString(", ")
-
-    keyLabel.setText(s" $keyText")
+    handleAction()
   }
   scaleSequenceComboBox.getSelectionModel.select(0)
 
