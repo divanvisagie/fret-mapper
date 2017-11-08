@@ -52,7 +52,6 @@ object Note {
     }
   }
 
-    "D natural minor" -> keyFromJumpSequence("D",naturalMinorScale),
   private def getNote(note: String, selector: (Int) => Int): String = {
     val noteIndex = noteOrder.indexOf(note.toUpperCase)
     val noteOrderLoop = LoopAccessor[String](noteOrder)
