@@ -5,9 +5,9 @@ import org.scalatest.{FlatSpec, Matchers}
 class StringMapperSpec extends FlatSpec with Matchers {
 
   def testForNote(note: String): Unit = {
-    s"getStringStartingWith $note" should s"have a length of 12 and end with $note" in {
+    s"getStringStartingWith $note" should s"""have a length of ${Guitar.frets} and end with $note""" in {
       val string = StringMapper getStringStartingWith note
-      string.length should be (12)
+      string.length should be (Guitar.frets)
       string.last should be (note)
     }
   }

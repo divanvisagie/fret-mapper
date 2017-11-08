@@ -1,7 +1,8 @@
 package fretmapper.views
 
-import fretmapper.FretMapperApp.applicationStore
-import fretmapper.core.{ApplicationStore, ClearSelectedNotes, NoteMapper}
+import javafx.event.EventHandler
+
+import fretmapper.core.{ApplicationStore, ClearSelectedNotes, Note, Scale}
 
 import scalafx.Includes.handle
 import scalafx.geometry.Insets
@@ -14,7 +15,6 @@ import scalafx.scene.layout.HBox
   * */
 class ScaleSelector(applicationStore: ApplicationStore) {
   private val hbox = new HBox()
-
   private val label = new Label("Highlight Scale:")
   private val keyLabel = new Label("")
 
@@ -25,34 +25,53 @@ class ScaleSelector(applicationStore: ApplicationStore) {
 
   def container: Node = hbox
 
-  def scale: String = comboBox.getSelectionModel.getSelectedItem
+  def scaleSequenceKey: String = scaleSequenceComboBox.getSelectionModel.getSelectedItem
+  def note: String = noteComboBox.getSelectionModel.getSelectedItem
 
-//  private def key: Seq[String] = NoteMapper.musicalKeys.getOrElse(scale,Seq[String]())
-
-  val labelPadding = Insets(2,10,5,5)
+  private val boxPadding = Insets(0,0,0,10)
+  private val labelPadding = Insets(2,10,5,5)
   label.padding = labelPadding
   keyLabel.padding = labelPadding
 
-  private val comboBox = new ComboBox[String]()
-  comboBox += "None"
-  NoteMapper.musicalKeys.keySet.foreach { note =>
-    comboBox += note
-  }
-  comboBox.onAction = handle {
-//    val noteToUse = NoteMapper.musicalKeys(note).head
-//    println(noteToUse)
+
+  private val scaleSequenceComboBox = new ComboBox[String]()
+  private val noteComboBox = new ComboBox[String]()
+
+
+  def handleAction(): Unit = {
+    val scaleSequence = Scale.scales.getOrElse(scaleSequenceKey,Seq[Int]())
+    val scale = Scale(note,scaleSequence)
+
     applicationStore ! scale
-    val keyText =
-      NoteMapper.flattenKeyIfNeeded(
-        NoteMapper.musicalKeys.getOrElse(scale,Seq[String]()))
-        .mkString(", ")
+
+    val keyText = Note.scaleFromJumpSequence(note, scaleSequence)
+      .mkString(", ")
 
     keyLabel.setText(s" $keyText")
   }
-  comboBox.getSelectionModel.select(0)
+
+  noteComboBox += "None"
+  Note.noteOrder.foreach { note =>
+    noteComboBox += note
+  }
+  noteComboBox.onAction = handle {
+    handleAction()
+  }
+  noteComboBox.getSelectionModel.select(0)
+
+  scaleSequenceComboBox.margin = boxPadding
+  scaleSequenceComboBox += "None"
+  Scale.scales.keySet.foreach { note =>
+    scaleSequenceComboBox += note
+  }
+  scaleSequenceComboBox.onAction = handle {
+    handleAction()
+  }
+  scaleSequenceComboBox.getSelectionModel.select(0)
 
   hbox.children.add(label)
-  hbox.children.add(comboBox)
+  hbox.children.add(noteComboBox)
+  hbox.children.add(scaleSequenceComboBox)
   hbox.children.add(keyLabel)
   hbox.children.add(clearUserSelectedAButton)
 

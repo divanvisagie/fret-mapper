@@ -6,7 +6,7 @@ import scala.collection.immutable.ListMap
 /**
   * Utilities for mapping notes
   * */
-object NoteMapper {
+object Note {
   /**
     * Sequence representing the order of notes
     * */
@@ -29,7 +29,10 @@ object NoteMapper {
     }
   }
 
-  def keyFromJumpSequence(root: String ,noteJumps: Seq[Int]): Seq[String] = {
+  def scaleFromJumpSequence(root: String, noteJumps: Seq[Int]): Seq[String] = {
+      if (noteJumps.isEmpty) {
+        return Seq[String]()
+      }
       val rootIndex = noteOrder.indexOf(root)
       var currentIndex = rootIndex
       val noteOrderLoop = LoopAccessor[String](noteOrder)
@@ -49,35 +52,7 @@ object NoteMapper {
     }
   }
 
-  private val majorScale = Seq(2,2,1,2,2,2,1)
-  private val naturalMinorScale = Seq(2,1,2,2,1,2,2)
-  private val minorHarmonicScale = Seq(2,1,2,2,1,3,1)
-  private val diminished = Seq(2,1,2,1,2,1,2,1)
-  private val persianScale = Seq(1,3,1,1,2,3,1)
-
-
-  /**
-    * A map where the key is the note and the value is a sequence of notes that are contained within
-    * that musical key
-    * */
-  val musicalKeys: ListMap[String, Seq[String]] = ListMap[String,Seq[String]](
-    "A major" -> keyFromJumpSequence("A",majorScale),
-    "A natural minor" -> keyFromJumpSequence("A",naturalMinorScale),
-    "B flat major" -> keyFromJumpSequence("A#",majorScale),
-    "B major" -> keyFromJumpSequence("B",majorScale),
-    "C major" -> keyFromJumpSequence("C",majorScale),
-    "C diminished" -> keyFromJumpSequence("C",diminished),
-    "C persian" -> keyFromJumpSequence("C",persianScale),
-    "C natural minor" -> keyFromJumpSequence("C", naturalMinorScale),
-    "C persian" -> keyFromJumpSequence("C", persianScale),
     "D natural minor" -> keyFromJumpSequence("D",naturalMinorScale),
-    "E natural minor" -> keyFromJumpSequence("E",naturalMinorScale),
-    "F major" -> keyFromJumpSequence("F", majorScale),
-    "F natural minor" -> keyFromJumpSequence("F", naturalMinorScale),
-    "F minor harmonic" -> keyFromJumpSequence("F", minorHarmonicScale),
-    "G major" -> keyFromJumpSequence("G", majorScale),
-  )
-
   private def getNote(note: String, selector: (Int) => Int): String = {
     val noteIndex = noteOrder.indexOf(note.toUpperCase)
     val noteOrderLoop = LoopAccessor[String](noteOrder)

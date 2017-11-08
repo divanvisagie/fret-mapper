@@ -6,7 +6,7 @@ class NoteMapperSpec extends FlatSpec with Matchers {
 
   def testNextNote(note: String, nextNote: String): Unit = {
     s"getNextNote $note" should s"return $nextNote" in {
-      NoteMapper.next(note) should be (nextNote)
+      Note.next(note) should be (nextNote)
     }
   }
   testNextNote("A","A#")
@@ -21,7 +21,7 @@ class NoteMapperSpec extends FlatSpec with Matchers {
 
   def testPreviousNote(note: String, previousNote: String): Unit = {
     s"getPrevioustNote $note" should s"return $previousNote" in {
-      NoteMapper.previous(note) should be (previousNote)
+      Note.previous(note) should be (previousNote)
     }
   }
   testPreviousNote("A#", "A")
@@ -29,7 +29,7 @@ class NoteMapperSpec extends FlatSpec with Matchers {
 
   def testFlattenSharpNote(note: String, flattened: String): Unit = {
     s"flattenSharpNote $note" should s"return $flattened" in {
-      NoteMapper.flattenSharpNote(note) should be (flattened)
+      Note.flattenSharpNote(note) should be (flattened)
     }
   }
   testFlattenSharpNote("A#","B♭")
