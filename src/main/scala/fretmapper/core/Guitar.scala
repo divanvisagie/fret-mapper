@@ -27,6 +27,9 @@ class Guitar(tuning: Seq[String]) {
   }
 }
 object Guitar {
+
+  val frets = 24
+
   def apply(tuning: Seq[String]): Guitar = new Guitar(tuning)
 
   /**

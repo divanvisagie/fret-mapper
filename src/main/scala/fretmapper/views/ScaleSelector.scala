@@ -44,7 +44,7 @@ class ScaleSelector(applicationStore: ApplicationStore) {
 
     applicationStore ! scale
 
-    val keyText = Note.keyFromJumpSequence(note, scaleSequence)
+    val keyText = Note.scaleFromJumpSequence(note, scaleSequence)
       .mkString(", ")
 
     keyLabel.setText(s" $keyText")

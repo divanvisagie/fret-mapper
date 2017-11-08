@@ -10,7 +10,7 @@ class Scale(note: String, scaleSequence: Seq[Int]) {
     if (note == "None" || scaleSequence.isEmpty){
       Seq[String]() }
     else {
-      Note.keyFromJumpSequence(note,scaleSequence)
+      Note.scaleFromJumpSequence(note,scaleSequence)
     }
 }
 
