@@ -8,14 +8,20 @@ import be.tarsos.dsp.pitch.{PitchDetectionHandler, PitchDetectionResult, PitchPr
 
 class PitchReader {
 
+  val sampleRate = 8000
+  val audioBufferSize = 32
+  val bufferOverlap = 0
+
   def readPitch(): Unit = {
     val handler = new PitchDetectionHandler {
-      override def handlePitch(pitchDetectionResult: PitchDetectionResult, audioEvent: AudioEvent): Unit =
-        println(audioEvent.getTimeStamp() + " " + pitchDetectionResult.getPitch())
+      override def handlePitch(pitchDetectionResult: PitchDetectionResult, audioEvent: AudioEvent): Unit = {
+        println(audioEvent.getTimeStamp + " " + pitchDetectionResult.getPitch)
+      }
     }
 
-    val adp = AudioDispatcherFactory.fromDefaultMicrophone(2048, 0)
-    adp.addAudioProcessor(new PitchProcessor(PitchEstimationAlgorithm.YIN, 44100, 2048, handler))
+    val adp = AudioDispatcherFactory.fromDefaultMicrophone(audioBufferSize, 0)
+
+    adp.addAudioProcessor(new PitchProcessor(PitchEstimationAlgorithm.YIN, sampleRate, audioBufferSize, handler))
   }
 
 }

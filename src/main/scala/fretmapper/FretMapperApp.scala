@@ -17,6 +17,7 @@ object FretMapperApp extends JFXApp {
   private val applicationStore = ApplicationStore()
 
   private val pitchReader = new PitchReader()
+  pitchReader.readPitch()
 
   private val guitar = Guitar.standardE
 
