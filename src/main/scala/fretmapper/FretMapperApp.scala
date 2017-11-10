@@ -1,5 +1,6 @@
 package fretmapper
 
+import fretmapper.audio.PitchReader
 import fretmapper.core.{ApplicationStore, Guitar}
 import fretmapper.views._
 
@@ -14,6 +15,8 @@ object FretMapperApp extends JFXApp {
 
 
   private val applicationStore = ApplicationStore()
+
+  private val pitchReader = new PitchReader()
 
   private val guitar = Guitar.standardE
 
@@ -49,5 +52,6 @@ object FretMapperApp extends JFXApp {
       root = containerBox
     }
   }
+
 }
 
